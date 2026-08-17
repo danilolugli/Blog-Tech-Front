@@ -50,8 +50,14 @@
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
 #root {
-  width: 1126px;
+  width: 100%;
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -60,10 +66,6 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-}
-
-body {
-  margin: 0;
 }
 
 h1,
