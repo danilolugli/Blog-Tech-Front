@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
@@ -40,6 +40,10 @@ const BotaoIcone = styled.button`
     height: 40px;
     border: 0;
     margin: 15px;
+    cursor: pointer;
+    &:hover {
+        background-color: #4f46e5;
+    }
 `;
 
 const BotaoSair = styled.button`
@@ -50,9 +54,15 @@ const BotaoSair = styled.button`
     color: #fafaff;
     border: 0;
     margin: 15px;
+    cursor: pointer;&:hover {
+        color: #3730a3;
+        background-color: #fafaff;
+    }
 `;
 
 const Header: React.FC = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
+
         return (
         <HeaderContainer>
             <HeaderTitle>Blog Tech Challenge</HeaderTitle>
@@ -63,12 +73,14 @@ const Header: React.FC = () => {
                 <HeaderLink>Admin</HeaderLink>
             </HeaderList>
 
-            <HeaderActions>
-                <BotaoIcone>Lupa</BotaoIcone>
-                <BotaoIcone>Tema</BotaoIcone>
-                <img src="" />
-                <BotaoSair>Sair</BotaoSair>
-            </HeaderActions>
+            {isLoggedIn && (
+                <HeaderActions>
+                    <BotaoIcone>Lupa</BotaoIcone>
+                    <BotaoIcone>Tema</BotaoIcone>
+                    <img src="" />
+                    <BotaoSair>Sair</BotaoSair>
+                </HeaderActions>
+            )}
         </HeaderContainer>
     );
 };
