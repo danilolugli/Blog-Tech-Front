@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const FooterContainer = styled.footer`
     display: flex;
-    // height: 10%;
     background-color: #fafaff;
 `;
 
