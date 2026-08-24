@@ -12,6 +12,7 @@ const LoginContainer = styled.div`
     flex-direction: column;
     border: 1px solid #2626bc;
     margin: 5% auto;
+    z-index: 1;
 `;
 
 const Titulo = styled.h1`
@@ -74,24 +75,26 @@ const LinkCadastro = styled.a`
 `;
 
 const Login: React.FC = () => {
-    return (
-        <LoginContainer> 
-            <Titulo>Login</Titulo>
-            <Subtitulo>Entre para gerenciar seu conteúdo educacional</Subtitulo>
-            
-            <div className="input-container">
-                <LabelInput htmlFor="email">Email</LabelInput>
-                <InputEmail id="email" type="email" placeholder="professor@blogtech.com.br"></InputEmail>
-            </div>
+    return (            
+        <div className="background-login">
+            <LoginContainer>
+                <Titulo>Login</Titulo>
+                <Subtitulo>Entre para gerenciar seu conteúdo educacional</Subtitulo>
+                
+                <div className="input-container">
+                    <LabelInput htmlFor="email">Email</LabelInput>
+                    <InputEmail id="email" type="email" placeholder="professor@blogtech.com.br"></InputEmail>
+                </div>
 
-            <div className="input-container">
-                <LabelInput htmlFor="senha">Senha</LabelInput>
-                <InputSenha id="senha" type="password" placeholder="••••••••"></InputSenha>
-            </div>
+                <div className="input-container">
+                    <LabelInput htmlFor="senha">Senha</LabelInput>
+                    <InputSenha id="senha" type="password" placeholder="••••••••"></InputSenha>
+                </div>
 
-            <BotaoLogin >Entrar</BotaoLogin>
-            <LinkCadastro href="#">Não possui uma conta? Cadastre-se</LinkCadastro>
-        </LoginContainer>
+                <BotaoLogin>Entrar</BotaoLogin>
+                <LinkCadastro href="#">Não possui uma conta? Cadastre-se</LinkCadastro>
+            </LoginContainer>       
+        </div>
     );  
 };
 

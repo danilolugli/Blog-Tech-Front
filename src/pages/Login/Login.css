@@ -1,3 +1,10 @@
+.background-login {
+    display: flex;
+    background-color: white;
+    width: 100%;
+    z-index: 0;
+}
+
 .input-container {
     display: flex;
     flex-direction: column;
@@ -5,3 +12,13 @@
     margin-bottom: 16px;
     width: 75%;
 }
+
+/* 
+PALETA
+#224599
+#2b3f6f
+#262f44
+#b8cdff
+#e2ebff
+
+*/

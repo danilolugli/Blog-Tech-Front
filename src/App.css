@@ -1,3 +1,22 @@
+:root {
+  --azul: #224599;
+  --azul-escuro: #2b3f6f;
+  --azul-mais-escuro: #262f44;
+  --azul-claro: #b8cdff;
+  --azul-mais-claro: #e2ebff;
+
+  --color-secondary: #6c757d;
+  --color-secondary-hover: #5a6268;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --color-background: #f5f5f5;
+  --color-text: #212529;
+  --color-border: #dee2e6;
+}
+
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;

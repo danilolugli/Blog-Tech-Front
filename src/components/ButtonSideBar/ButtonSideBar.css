@@ -1,0 +1,26 @@
+.button-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0px;
+    width:  90%;
+    height: 40px;
+    font-size: 12px;
+    background-color: var(--azul);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+}
+
+/* 
+PALETA
+#224599
+#2b3f6f
+#262f44
+#b8cdff
+#e2ebff
+
+*/
