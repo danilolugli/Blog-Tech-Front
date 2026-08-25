@@ -1,12 +1,14 @@
 .button-sidebar {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 10px 0px;
-    width:  90%;
+    padding: 0px 20px;
+    width: 90%;
     height: 40px;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 700;
     background-color: var(--azul);
     color: white;
     border: none;
@@ -15,12 +17,6 @@
     border-radius: 10px;
 }
 
-/* 
-PALETA
-#224599
-#2b3f6f
-#262f44
-#b8cdff
-#e2ebff
-
-*/
+.button-sidebar:hover {
+    background-color: var(--azul-claro);
+}

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ButtonSideBar from '../ButtonSideBar/ButtonSideBar';
+import './SideBar.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClipboard, faGear, faHouse, faUsers, faBars } from '@fortawesome/free-solid-svg-icons';
 
 const SideBarContainer = styled.div`
     display: flex;
@@ -12,10 +15,11 @@ const SideBarContainer = styled.div`
 `;
 
 const SideBarTitle = styled.label`
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 700;
     color: var(--azul-mais-claro);
     margin: 30px 0px;
+    font-family: Arial, sans-serif;
 `;
 
 const SideBarList = styled.ul`
@@ -35,22 +39,6 @@ const SideBarActions = styled(SideBarList)`
     margin-left: auto;
 `;
 
-const SideBarLink = styled.li`
-    margin: 30px;
-    cursor: pointer;
-`;
-
-const BotaoIcone = styled.button`
-    width: 40px;
-    height: 40px;
-    border: 0;
-    margin: 15px;
-    cursor: pointer;
-    &:hover {
-        background-color: #4f46e5;
-    }
-`;
-
 const BotaoSair = styled.button`
     width: 70px;
     height: 40px;
@@ -59,10 +47,29 @@ const BotaoSair = styled.button`
     color: #fafaff;
     border: 0;
     margin: 15px;
-    cursor: pointer;&:hover {
+    cursor: pointer;
+    &:hover {
         color: #3730a3;
         background-color: #fafaff;
     }
+`;
+
+const UserIcon = styled(FontAwesomeIcon)`
+    color: #var(--azul-mais-claro);
+    margin: 0px 8px;
+`;
+
+const IconButton = styled.button`
+    display: flex;
+    background-color: var(--azul);
+    border: none;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 10px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    border-radius: 5px;
 `;
 
 const SideBar: React.FC = () => {
@@ -70,24 +77,34 @@ const SideBar: React.FC = () => {
 
         return (
         <SideBarContainer>
-            <SideBarTitle>Blog Tech</SideBarTitle>
+            <div className="sidebar-header">
+                <SideBarTitle>BlogTech</SideBarTitle>
+                <IconButton>
+                   <UserIcon icon={faBars} size="lg" color="white" />
+                </IconButton>
+
+            </div>
 
             <SideBarList>
-             
-                    <ButtonSideBar>
-                        <img src="C:\Users\jrsdl\Downloads\logo.jpeg" />
-                        Home
-                    </ButtonSideBar>
+                <ButtonSideBar>  
+                    <UserIcon icon={faHouse} size="lg" color="white" />
+                    Home
+                </ButtonSideBar>
                   
-                <ButtonSideBar>Posts</ButtonSideBar>
+                <ButtonSideBar>
+                    <UserIcon icon={faClipboard} size="lg" color="white" />
+                    Posts
+                </ButtonSideBar>
               
-                <ButtonSideBar>Usuários</ButtonSideBar>
-               
-                <ButtonSideBar>Usuários</ButtonSideBar>
-           
-                <ButtonSideBar>Usuários</ButtonSideBar>
+                <ButtonSideBar>
+                    <UserIcon icon={faUsers} size="lg" color="white" />
+                    Usuários
+                </ButtonSideBar>
             
-                <ButtonSideBar>Configurações</ButtonSideBar>
+                <ButtonSideBar>
+                    <UserIcon icon={faGear} size="lg" color="white" />
+                    Configurações
+                </ButtonSideBar>
            
             </SideBarList>
 

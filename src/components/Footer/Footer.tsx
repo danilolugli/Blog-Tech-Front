@@ -45,8 +45,8 @@ const Footer: React.FC = () => {
     return (
         <FooterContainer>
             <FooterList>
-                <li> <TituloFooter>BlogTechChallenge</TituloFooter> </li>
-                <li> <Frase>2026 Blog Tech Challenge. Capacitando a próxima geração de acadêmicos.</Frase> </li>
+                <li> <TituloFooter>BlogTech</TituloFooter> </li>
+                <li> <Frase>2026 BlogTech. Capacitando a próxima geração de acadêmicos.</Frase> </li>
             </FooterList>
 
             <FooterListTwo>
