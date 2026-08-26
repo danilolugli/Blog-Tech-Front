@@ -1,13 +1,19 @@
+.login-imagem {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+}
+
 .background-login {
     display: flex;
-    background-color: white;
+    background-color: rgb(247, 247, 247);
     width: 100%;
 }
 
 .input-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 16px;
     width: 75%;
 }

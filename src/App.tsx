@@ -3,6 +3,7 @@ import './App.css';
 import Footer from './components/Footer/Footer';
 import SideBar from './components/SideBar/SideBar';
 import Login from './pages/Login/Login';
+import { useState } from 'react';
 
 const AppContainer = styled.div`
   display: flex;
@@ -10,20 +11,32 @@ const AppContainer = styled.div`
   height: 100%;
 `;
 
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
 function App() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
   
   return (
     <>
       <AppContainer>
         
-        <SideBar/>
+        {isLoggedIn && (
+        <SideBar/>)}
 
-        <Login/>  {// # # /* Login só está de exemplo */
-        }
+        <Main>
+          <Login/>  {// # # /* Login só está de exemplo */
+          }
+          <Footer/>
+        </Main>
+       
+          
 
       </AppContainer>
     
-      <Footer/>
     </>
   );
 }

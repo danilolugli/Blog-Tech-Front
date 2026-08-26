@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 const FooterContainer = styled.footer`
     display: flex;
-    background-color: #fafaff;
+    background-color: var(--azul-mais-escuro);
+    width: 100%;
 `;
 
 const FooterList = styled.ul`
@@ -15,7 +16,7 @@ const FooterList = styled.ul`
 
 const TituloFooter = styled.h3`
     font-size: 32px;
-    color: #2626bc;
+    color: var(--azul-mais-claro);
     left: 0;
     font-weight: 500;
 `;
@@ -23,6 +24,7 @@ const TituloFooter = styled.h3`
 const Frase = styled.h2`
     font-weight: 300;
     font-size: 20px;
+    color: var(--azul-mais-claro);
 `;
 
 const FooterListTwo = styled.ul`
@@ -39,6 +41,7 @@ const TextoFooter = styled.h4`
     font-weight: 400;
     margin: 5px 25px;
     font-size: 20px;
+    color: var(--azul-mais-claro);
 `;
 
 const Footer: React.FC = () => {
@@ -54,9 +57,7 @@ const Footer: React.FC = () => {
                 <li><TextoFooter>Termos de Serviço</TextoFooter></li>
                 <li><TextoFooter>Contatos</TextoFooter></li>
                 <li><TextoFooter>História</TextoFooter></li>
-            </FooterListTwo>
-            
-            
+            </FooterListTwo>        
         </FooterContainer>
     );  
 };

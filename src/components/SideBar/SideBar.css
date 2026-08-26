@@ -10,3 +10,12 @@
     height: 40px;
     border-radius: 10%;
 }
+
+.barraSair {
+    position: absolute;
+    bottom: 100px;
+    left: 20px;
+    width: 13%;
+    height: 1px;
+    background-color: var(--azul-mais-claro);
+}

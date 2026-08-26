@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import ButtonSideBar from '../ButtonSideBar/ButtonSideBar';
 import './SideBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClipboard, faGear, faHouse, faUsers, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faClipboard, faGear, faHouse, faUsers, faBars, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 const SideBarContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 20px;
-    width: 20%;
+    width: 15%;
     font-family: Merriweather;
     background-color: var(--azul-mais-escuro);
 `;
@@ -18,7 +18,7 @@ const SideBarTitle = styled.label`
     font-size: 26px;
     font-weight: 700;
     color: var(--azul-mais-claro);
-    margin: 30px 0px;
+    margin: 30px 10px;
     font-family: Arial, sans-serif;
 `;
 
@@ -40,20 +40,32 @@ const SideBarActions = styled(SideBarList)`
 `;
 
 const BotaoSair = styled.button`
-position: absolute;
-    width: 70px;
+    position: absolute;
+    width: 11%;
     height: 40px;
-    padding: 0;
-    background-color: #3730a3;
-    color: #fafaff;
-    border: 0;
-    margin: 20px;
+    background-color: var(--azul-mais-escuro);
+    color: var(--azul-mais-claro);
+    border: 1px solid var(--azul-mais-claro);
+    margin: 10px 0px;
     cursor: pointer;
-    bottom: 0;
-    left: 0;
+    bottom: 20px;
+    left: 35px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px 10px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+
     &:hover {
-        color: #3730a3;
-        background-color: #fafaff;
+        color: var(--azul);
+        background-color: var(--azul-mais-claro);
+    }  
+    &:active {
+        transform: scale(0.95);
     }
 `;
 
@@ -73,6 +85,10 @@ const IconButton = styled.button`
     width: 40px;
     cursor: pointer;
     border-radius: 5px;
+
+    &:active {
+        transform: scale(0.95);
+    }
 `;
 
 const SideBar: React.FC = () => {
@@ -109,13 +125,16 @@ const SideBar: React.FC = () => {
                     <UserIcon icon={faGear} size="lg" color="white" />
                     Configurações
                 </ButtonSideBar>
-           
             </SideBarList>
+
+            <div className="barraSair"></div>
 
             {isLoggedIn && (
                 <SideBarActions>
-                    <img src="" />
-                    <BotaoSair>Sair</BotaoSair>
+                    <BotaoSair>
+                        <UserIcon icon={faRightFromBracket} size="lg" color="white" />
+                        Sair
+                    </BotaoSair>
                 </SideBarActions>
             )}
         </SideBarContainer>

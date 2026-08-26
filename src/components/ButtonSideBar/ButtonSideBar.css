@@ -20,4 +20,10 @@
 
 .button-sidebar:hover {
     background-color: var(--azul-claro);
+    color: var(--azul);
 }
+
+.button-sidebar:active {
+    transform: scale(0.95);
+}
+ 
