@@ -4,23 +4,14 @@ import styles from "./ConfirmModal.module.css";
 type ConfirmModalVariant = "danger" | "warning" | "info";
 
 export interface ConfirmModalProps {
-  /** Controla se o modal está visível */
   isOpen: boolean;
-  /** Título exibido no topo do modal (ex: "Excluir Post?") */
   title: string;
-  /** Texto/descrição exibido abaixo do título */
   message: string;
-  /** Texto do botão de confirmação (padrão: "Excluir") */
   confirmText?: string;
-  /** Texto do botão de cancelamento (padrão: "Cancelar") */
   cancelText?: string;
-  /** Cor/tema do ícone e do botão de confirmação (padrão: "danger") */
   variant?: ConfirmModalVariant;
-  /** Desabilita os botões e mostra estado de carregamento (ex: aguardando request) */
   isLoading?: boolean;
-  /** Chamado ao clicar em "Cancelar", fechar no overlay ou pressionar Esc */
   onCancel: () => void;
-  /** Chamado ao clicar no botão de confirmação (ex: "Excluir") */
   onConfirm: () => void;
 }
 
