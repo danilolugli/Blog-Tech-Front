@@ -40,14 +40,17 @@ const SideBarActions = styled(SideBarList)`
 `;
 
 const BotaoSair = styled.button`
+position: absolute;
     width: 70px;
     height: 40px;
     padding: 0;
     background-color: #3730a3;
     color: #fafaff;
     border: 0;
-    margin: 15px;
+    margin: 20px;
     cursor: pointer;
+    bottom: 0;
+    left: 0;
     &:hover {
         color: #3730a3;
         background-color: #fafaff;
@@ -61,8 +64,8 @@ const UserIcon = styled(FontAwesomeIcon)`
 
 const IconButton = styled.button`
     display: flex;
-    background-color: var(--azul);
-    border: none;
+    background-color: var(--azul-mais-escuro);
+    border: 1px solid var(--azul-mais-claro);
     align-items: center;
     justify-content: center;
     margin: 0px 10px;
@@ -73,14 +76,15 @@ const IconButton = styled.button`
 `;
 
 const SideBar: React.FC = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
 
         return (
         <SideBarContainer>
             <div className="sidebar-header">
+                <img src="src\assets\logo2.jpeg" alt="Logo BlogTech" className="sidebar-logo" />
                 <SideBarTitle>BlogTech</SideBarTitle>
                 <IconButton>
-                   <UserIcon icon={faBars} size="lg" color="white" />
+                   <UserIcon icon={faBars} size="lg" color="var(--azul-mais-claro)" />
                 </IconButton>
 
             </div>

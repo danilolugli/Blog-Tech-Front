@@ -5,14 +5,13 @@ const LoginContainer = styled.div`
     display: flex;
     width: 30%;
     height: 70%;
-    background-color: #fafaff;
+    background-color: var(--azul-claro);
     border-radius: 3px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border: 1px solid #2626bc;
     margin: 5% auto;
-    z-index: 1;
 `;
 
 const Titulo = styled.h1`
