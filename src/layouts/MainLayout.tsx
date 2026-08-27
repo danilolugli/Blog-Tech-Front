@@ -7,13 +7,17 @@ import SideBar from "../components/SideBar/SideBar";
 const AppContainer = styled.div`
   display: flex;
   min-height: 100vh;
-  height: 100%;
 `;
 
 const Main = styled.main`
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-height: 100vh;
+`;
+
+const FooterContainer = styled.div`
+  margin-top: auto;
 `;
 
 function MainLayout() {
@@ -23,7 +27,10 @@ function MainLayout() {
 
       <Main>
         <Outlet />
-        <Footer />
+
+        <FooterContainer>
+          <Footer />
+        </FooterContainer>
       </Main>
     </AppContainer>
   );
