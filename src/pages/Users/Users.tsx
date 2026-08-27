@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./Users.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
 
 interface User {
   id: number;
@@ -151,21 +153,21 @@ function Users() {
                 <td>
                   <div className="action-buttons">
                     <button
-                      type="button"
-                      className="edit-button"
-                      onClick={() => handleEditUser(user.id)}
-                      title="Editar usuário"
-                    >
-                      ✎
+                        type="button"
+                        className="edit-button"
+                        onClick={() => handleEditUser(user.id)}
+                        title="Editar usuário"
+                        >
+                        <FontAwesomeIcon icon={faPen} />
                     </button>
 
                     <button
-                      type="button"
-                      className="delete-button"
-                      onClick={() => handleDeleteUser(user.id)}
-                      title="Excluir usuário"
-                    >
-                      ♡
+                        type="button"
+                        className="delete-button"
+                        onClick={() => handleDeleteUser(user.id)}
+                        title="Excluir usuário"
+                        >
+                        <FontAwesomeIcon icon={faTrash} />
                     </button>
                   </div>
                 </td>
