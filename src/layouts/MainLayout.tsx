@@ -10,6 +10,7 @@ const AppContainer = styled.div`
 
 const Main = styled.main`
   margin-left: 240px;
+  height: 100vh;
 `;
 
 const FooterContainer = styled.div`
@@ -39,7 +40,7 @@ const SideBarContainer = styled.div`
 `;
 
 const PageContent = styled.div`
-  min-height: 100vh;
+    height: 100%;
 `;
 
 function MainLayout() {
