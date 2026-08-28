@@ -9,7 +9,7 @@ const SideBarContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 20px;
-    width: 15%;
+    width: 100%;
     font-family: Merriweather;
     background-color: var(--azul-mais-escuro);
 `;
@@ -41,7 +41,7 @@ const SideBarActions = styled(SideBarList)`
 
 const BotaoSair = styled.button`
     position: absolute;
-    width: 11%;
+    width: auto;
     height: 40px;
     background-color: var(--azul-mais-escuro);
     color: var(--azul-mais-claro);
