@@ -6,10 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboard, faGear, faHouse, faUsers, faBars, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 const SideBarContainer = styled.div<{ $isCollapsed: boolean }>`
-    width: ${({ $isCollapsed }) => ($isCollapsed ? "5%" : "20%")};
+    width: ${({ $isCollapsed }) => ($isCollapsed ? "100%" : "20%")};
     display: flex;
     flex-direction: column;
-    padding: 20px;
     font-family: Merriweather;
     background-color: var(--azul-mais-escuro);
 `;

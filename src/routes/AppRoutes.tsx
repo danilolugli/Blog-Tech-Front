@@ -7,6 +7,7 @@ import {
 import MainLayout from "../layouts/MainLayout";
 
 import Login from "../pages/Login/Login";
+import Users from "../pages/Users/Users";
 
 function Home() {
   return <h1>Home</h1>;
@@ -34,6 +35,8 @@ function AppRoutes() {
           <Route path="/home" element={<Home />} />
 
           <Route path="/posts" element={<Posts />} />
+
+          <Route path="/manage-users" element={<Users />} />
 
         </Route>
 
