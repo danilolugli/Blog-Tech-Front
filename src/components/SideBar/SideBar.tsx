@@ -5,11 +5,11 @@ import './SideBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboard, faGear, faHouse, faUsers, faBars, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
-const SideBarContainer = styled.div`
+const SideBarContainer = styled.div<{ $isCollapsed: boolean }>`
+    width: ${({ $isCollapsed }) => ($isCollapsed ? "5%" : "20%")};
     display: flex;
     flex-direction: column;
     padding: 20px;
-    width: 15%;
     font-family: Merriweather;
     background-color: var(--azul-mais-escuro);
 `;
@@ -39,13 +39,13 @@ const SideBarActions = styled(SideBarList)`
     margin-left: auto;
 `;
 
-const BotaoSair = styled.button`
+const BotaoSair = styled.button<{ $isCollapsed: boolean }>`
     position: absolute;
-    width: 11%;
+    width: ${({ $isCollapsed }) => ($isCollapsed ? "1%" : "10%")};
     height: 40px;
     background-color: var(--azul-mais-escuro);
-    color: var(--azul-mais-claro);
-    border: 1px solid var(--azul-mais-claro);
+    color: ${({ $isCollapsed }) => ($isCollapsed ? "var(--azul-mais-escuro);" : "var(--azul-mais-claro)")}; 
+    border: ${({ $isCollapsed }) => ($isCollapsed ? "none" : "1px solid var(--azul-mais-claro);")}; 
     margin: 10px 0px;
     cursor: pointer;
     bottom: 20px;
@@ -70,7 +70,7 @@ const BotaoSair = styled.button`
 `;
 
 const UserIcon = styled(FontAwesomeIcon)`
-    color: #var(--azul-mais-claro);
+    color: var(--azul-mais-claro);
     margin: 0px 8px;
 `;
 
@@ -92,37 +92,37 @@ const IconButton = styled.button`
 `;
 
 const SideBar: React.FC = () => {
+    const [isCollapsed, setIsCollapsed] = useState(false);  
     const [isLoggedIn, setIsLoggedIn] = useState(true);
 
         return (
-        <SideBarContainer>
-            <div className="sidebar-header">
+        <SideBarContainer $isCollapsed={isCollapsed}>
+            <div>
                 <img src="src\assets\logo2.jpeg" alt="Logo BlogTech" className="sidebar-logo" />
                 <SideBarTitle>BlogTech</SideBarTitle>
-                <IconButton>
+                <IconButton onClick={() => setIsCollapsed(!isCollapsed)} >
                    <UserIcon icon={faBars} size="lg" color="var(--azul-mais-claro)" />
                 </IconButton>
-
             </div>
 
             <SideBarList>
                 <ButtonSideBar>  
-                    <UserIcon icon={faHouse} size="lg" color="white" />
+                    <UserIcon icon={faHouse} size="lg" color="var(--azul-mais-claro)" />
                     Home
                 </ButtonSideBar>
                   
                 <ButtonSideBar>
-                    <UserIcon icon={faClipboard} size="lg" color="white" />
+                    <UserIcon icon={faClipboard} size="lg" color="var(--azul-mais-claro)" />
                     Posts
                 </ButtonSideBar>
               
                 <ButtonSideBar>
-                    <UserIcon icon={faUsers} size="lg" color="white" />
+                    <UserIcon icon={faUsers} size="lg" color="var(--azul-mais-claro)" />
                     Usuários
                 </ButtonSideBar>
             
                 <ButtonSideBar>
-                    <UserIcon icon={faGear} size="lg" color="white" />
+                    <UserIcon icon={faGear} size="lg" color="var(--azul-mais-claro)" />
                     Configurações
                 </ButtonSideBar>
             </SideBarList>
@@ -131,8 +131,8 @@ const SideBar: React.FC = () => {
 
             {isLoggedIn && (
                 <SideBarActions>
-                    <BotaoSair>
-                        <UserIcon icon={faRightFromBracket} size="lg" color="white" />
+                    <BotaoSair $isCollapsed={isCollapsed}>
+                        <UserIcon icon={faRightFromBracket} size="lg" color="var(--azul-mais-claro)" />
                         Sair
                     </BotaoSair>
                 </SideBarActions>
