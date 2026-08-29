@@ -11,47 +11,27 @@ const AppContainer = styled.div`
 const Main = styled.main`
   margin-left: 240px;
   height: 100vh;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    padding-top: 60px;
+  }
 `;
 
 const FooterContainer = styled.div`
   margin-top: auto;
 `;
 
-const SideBarContainer = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    display: flex;
-    flex-direction: column;
-
-    width: 240px;
-    height: 100vh;
-
-    box-sizing: border-box;
-    padding: 20px;
-
-    font-family: Merriweather;
-    background-color: var(--azul-mais-escuro);
-
-    overflow-x: hidden;
-    overflow-y: auto;
-    z-index: 1000;
-`;
-
 const PageContent = styled.div`
-    height: 100%;
+  height: 100%;
 `;
 
 function MainLayout() {
   return (
     <AppContainer>
-      <SideBarContainer>
-        <SideBar />
-      </SideBarContainer>
+      <SideBar />
 
       <Main>
-
         <PageContent>
           <Outlet />
         </PageContent>

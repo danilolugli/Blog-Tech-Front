@@ -20,3 +20,11 @@
     height: 1px;
     background-color: var(--azul-mais-claro);
 }
+
+.mobile-header-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 10%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
