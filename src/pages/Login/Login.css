@@ -1,14 +1,55 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Lado esquerdo */
+
+.login-image-container {
+    display: flex;
+    align-items: center;
+    width: 45%;
+    height: 100%;
+    background-color: rgb(247, 247, 247);
+}
+
 .login-imagem {
     width: 100%;
     height: 70%;
     object-fit: cover;
 }
 
-.background-login {
+/* Lado direito */
+
+.login-form {
     display: flex;
-    background-color: rgb(247, 247, 247);
-    width: 100%;
+    width: 55%;
+    height: 100%;
+    background-color: var(--azul-claro);
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin: 5% auto;
 }
+
+.login-title {
+    font-size: 32px;
+    font-weight: 500;
+    margin: 40px 0 10px;
+}
+
+.login-subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: black;
+}
+
+/* Inputs */
 
 .input-container {
     display: flex;
@@ -18,12 +59,40 @@
     width: 75%;
 }
 
-/* 
-PALETA
-#224599
-#2b3f6f
-#262f44
-#b8cdff
-#e2ebff
+.input-label {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    color: black;
+}
 
-*/
+.login-input {
+    width: 70%;
+    height: 50px;
+
+    border: 1px solid var(--azul);
+    border-radius: 5px;
+
+    padding: 15px;
+    font-size: 18px;
+
+    box-sizing: border-box;
+}
+
+/* Botão */
+
+.login-button {
+    width: 52.5%;
+    height: 50px;
+
+    background-color: var(--azul-mais-escuro);
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+
+    font-size: 18px;
+    cursor: pointer;
+
+    margin: 20px;
+}
