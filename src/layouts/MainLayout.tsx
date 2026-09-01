@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 
 import Footer from "../components/Footer/Footer";
-import SideBar from "../components/SideBar/SideBar";
+import SideBar from "../components/Sidebar/SideBar";
 
 const AppContainer = styled.div`
   min-height: 100vh;
