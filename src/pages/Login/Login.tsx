@@ -1,117 +1,113 @@
-import styled from "styled-components";
-import './Login.css';
+import { useState } from "react";
+import { toast } from "react-toastify";
 
-const LoginContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-`;
+import "./Login.css";
 
-const LoginImagem = styled.div`
-    display: flex;
-    align-items: center;
-    width: 45%;
-    height: 100%;
-    background-color: rgb(247, 247, 247);
-`;
-
-const LoginForm = styled.div`
-    display: flex;
-    width: 55%;
-    height: 100%;
-    background-color: var(--azul-claro);
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 5% auto;
-`;
-
-const Titulo = styled.h1`
-    font-size: 32px;
-    font-weight: 500;
-    margin: 40px 0 10px;
-`;
-
-const Subtitulo = styled.label`
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 20px;
-    color: black;
-`;
-
-const LabelInput = styled.label`
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 5px;
-    color: black;
-`;
-
-const InputEmail = styled.input`
-    width: 70%;
-    height: 50px;
-    border: 1px solid  var(--azul);
-    padding: 15px;
-    font-size: 18px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-`;
-
-const InputSenha = styled.input`
-    width: 70%;
-    height: 50px;
-    border: 1px solid  var(--azul);
-    padding: 15px;
-    font-size: 18px;
-    border-radius: 5px;
-`;
-
-const BotaoLogin = styled.button`
-    width: 52.5%;
-    height: 50px;
-    background-color: var(--azul-mais-escuro);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-    margin: 20px;
-`;
-
-const LinkCadastro = styled.a`
-    font-size: 16px;
-    color: #2626bc;
-    text-decoration: underline;
-    margin: 10px 0 30px;
-`;
+import { loginController } from "./Login.controller";
 
 const Login: React.FC = () => {
-    return (  
-        <LoginContainer className="login-container">
-            <LoginImagem>
-                <img src="src/assets/logoTexto.jpeg" alt="Imagem logotipo login" className="login-imagem" />
-            </LoginImagem>
-        
-            <LoginForm>
-                <Titulo>Login</Titulo>
-                <Subtitulo>Entre para gerenciar seu conteúdo educacional</Subtitulo>
-                
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const handleLogin = async () => {
+        try {
+            setLoading(true);
+
+            const response = await loginController({
+                email,
+                senha,
+            });
+
+            console.log(response);
+
+            toast.success("Login realizado com sucesso!");
+        } catch (error) {
+            if (error instanceof Error) {
+                toast.error(error.message);
+                return;
+            }
+
+            toast.error("Erro ao realizar login.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className="login-container">
+            <div className="login-image-container">
+                <img
+                    src="src/assets/logoTexto.jpeg"
+                    alt="Imagem logotipo login"
+                    className="login-imagem"
+                />
+            </div>
+
+            <div className="login-form">
+                <h1 className="login-title">
+                    Login
+                </h1>
+
+                <p className="login-subtitle">
+                    Entre para gerenciar seu conteúdo educacional
+                </p>
+
                 <div className="input-container">
-                    <LabelInput htmlFor="email">E-mail</LabelInput>
-                    <InputEmail id="email" type="email" placeholder="professor@blogtech.com.br"></InputEmail>
+                    <label
+                        className="input-label"
+                        htmlFor="email"
+                    >
+                        E-mail
+                    </label>
+
+                    <input
+                        className="login-input"
+                        id="email"
+                        type="email"
+                        placeholder="professor@blogtech.com.br"
+                        value={email}
+                        onChange={(e) =>
+                            setEmail(e.target.value)
+                        }
+                    />
                 </div>
 
                 <div className="input-container">
-                    <LabelInput htmlFor="senha">Senha</LabelInput>
-                    <InputSenha id="senha" type="password" placeholder="••••••••"></InputSenha>
+                    <label
+                        className="input-label"
+                        htmlFor="senha"
+                    >
+                        Senha
+                    </label>
+
+                    <input
+                        className="login-input"
+                        id="senha"
+                        type="password"
+                        placeholder="••••••••"
+                        value={senha}
+                        onChange={(e) =>
+                            setSenha(e.target.value)
+                        }
+                    />
                 </div>
 
-                <BotaoLogin>Entrar</BotaoLogin>
-                <LinkCadastro href="#">Não possui uma conta? Cadastre-se</LinkCadastro>
-            </LoginForm>  
-            
-        </LoginContainer>
-    );  
+                <button
+                    className="login-button"
+                    type="button"
+                    onClick={handleLogin}
+                    disabled={
+                        loading ||
+                        email === "" ||
+                        senha === ""
+                    }
+                >
+                    {loading ? "Entrando..." : "Entrar"}
+                </button>
+            </div>
+        </div>
+    );
 };
 
 export default Login;
