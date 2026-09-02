@@ -4,8 +4,10 @@ import { toast } from "react-toastify";
 import "./Login.css";
 
 import { loginController } from "./Login.controller";
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [loading, setLoading] = useState(false);
@@ -13,23 +15,34 @@ const Login: React.FC = () => {
     const handleLogin = async () => {
         try {
             setLoading(true);
-
             const response = await loginController({
                 email,
                 senha,
             });
 
-            console.log(response);
+            sessionStorage.setItem(
+                "usuario",
+                JSON.stringify(response.usuario)
+            );
 
-            toast.success("Login realizado com sucesso!");
+            toast.success("Login realizado com sucesso!", {
+                autoClose: 3000,
+            });
+            setTimeout(() => {
+                toast.info("Direcionando para a tela inicial", {
+                    autoClose: 3500,
+                    onClose: () => {
+                        navigate("/listar");
+                    },
+                });
+            }, 100);
+            
         } catch (error) {
             if (error instanceof Error) {
-                toast.error(error.message);
-                return;
+                toast.warning(error.message);
+            } else {
+                toast.error("Infelizmente tivemos um erro na conexão com a API. Tente novamente.");
             }
-
-            toast.error("Erro ao realizar login.");
-        } finally {
             setLoading(false);
         }
     };
