@@ -21,7 +21,8 @@ const PostContainer = styled.div`
     &:active {
         transform: scale(0.98);}
     &:hover {
-        border: 1.5px solid var(--azul);}
+        border: 1.5px solid var(--azul);
+        cursor: pointer;}
 `;
 
 const PostInfo = styled.div`
@@ -52,13 +53,13 @@ const Titulo = styled.label`
     color: black;
     font-weight: 600;
     margin-bottom: 10px;
+    pointer-events: none;
 `;
 
 const Descricao = styled.p`
     font-size: 20px;
     color: gray;
 `;
-
 
 const PostPreview = ({ titulo, descricao, professor, data }: PostPreviewProps) => {
     return (

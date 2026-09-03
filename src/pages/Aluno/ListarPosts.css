@@ -1,3 +1,7 @@
+.titulo {
+    font-weight: bold;
+}
+
 .containerPesquisa {
     margin: 50px auto;
     position: relative;

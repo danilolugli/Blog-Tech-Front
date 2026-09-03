@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import './ListarPosts.css';
 import { PostFormModal } from '../../components/PostFormModal/PostFormModal';
 import PostPreview from '../../components/PostPreview/PostPreview';
@@ -8,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const ListarPosts: React.FC = () =>  {
   return (
     <>
-      <h1>Posts Recentes</h1>
+      <h1 className='titulo'>Posts Recentes</h1>
       <header className='containerPesquisa'>   
         <FontAwesomeIcon icon={faMagnifyingGlass} className='iconePesquisa' />
         <input type="text" placeholder="Busque por palavras-chave" className="inputPesquisa" />

@@ -9,6 +9,7 @@ import MainLayout from "../layouts/MainLayout";
 import Login from "../pages/Login/Login";
 import Users from "../pages/Users/Users";
 import ListarPosts from "../pages/Aluno/ListarPosts";
+import PostDetalhe from "../pages/Aluno/PostDetalhe";
 
 function Home() {
   return <h1>Home</h1>;
@@ -36,6 +37,8 @@ function AppRoutes() {
           <Route path="/manage-users" element={<Users />} />
 
           <Route path="/listar" element={<ListarPosts />} />
+
+          <Route path="/post-detalhe" element={<PostDetalhe />} />
 
         </Route>
 
