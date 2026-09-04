@@ -1,52 +1,157 @@
 .login-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    width: 100%;
+    height: 100vh;
+    font-family: inherit;
 }
 
 /* Lado esquerdo */
 
 .login-image-container {
+    position: relative;
     display: flex;
-    align-items: center;
-    width: 45%;
+    width: 45vw;
     height: 100%;
-    background-color: rgb(247, 247, 247);
+    overflow: hidden;
+}
+
+.login-image-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 80, 180, 0.80);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .login-imagem {
     width: 100%;
-    height: 70%;
+    height: 100%;
     object-fit: cover;
+}
+
+.login-imagem-mobile {
+    display: none;
+}
+
+.login-image-text {
+    position: absolute;
+    left: 9%;
+    bottom: 7%;
+    width: 80%;
+    z-index: 2;
+    color: white;
+}
+
+.title-imagem {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 12px 0;
+    max-width: 500px;
+}
+
+.description {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 500px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Banner mobile (logo + "EduBlog Mobile" sobre a imagem) */
+
+.login-mobile-banner {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 20px;
+}
+
+.login-logo-img--mobile {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    border: 1px solid white;
+}
+
+.login-mobile-banner-title {
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
 }
 
 /* Lado direito */
 
 .login-form {
     display: flex;
-    width: 55%;
+    width: 55vw;
     height: 100%;
-    background-color: var(--azul-claro);
-
+    background-color: #f3efef;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     flex-direction: column;
+    padding: 0 15vw;
+}
 
-    margin: 5% auto;
+/* Cabeçalho com logo (desktop) */
+
+.login-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    margin-bottom: 4px;
+    width: 45%;
+}
+
+.login-logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border: 1px solid #1d4ed8;
+    border-radius: 10px;
+    background-color: white;
 }
 
 .login-title {
-    font-size: 32px;
-    font-weight: 500;
-    margin: 40px 0 10px;
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0;
+    color: black;
+    white-space: nowrap;
 }
 
 .login-subtitle {
-    font-size: 18px;
+    width: 100%;
+    max-width: 320px;
+    font-size: 15px;
     font-weight: 400;
-    margin-bottom: 20px;
+    margin: 0 0 16px;
+    color: #555;
+    text-align: start;
+}
+
+/* Cabeçalho mobile ("Entrar" + subtítulo) */
+
+.login-mobile-title {
+    display: none;
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 4px;
     color: black;
+}
+
+.login-mobile-subtitle {
+    display: none;
+    font-size: 13px;
+    font-weight: 400;
+    margin: 0 0 16px;
+    color: #555;
 }
 
 /* Inputs */
@@ -54,45 +159,164 @@
 .input-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 16px;
-    width: 75%;
+    width: 100%;
+    max-width: 320px;
+    margin-bottom: 12px;
 }
 
 .input-label {
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: start;
+
     margin-bottom: 5px;
+
     color: black;
 }
 
 .login-input {
-    width: 70%;
-    height: 50px;
-
-    border: 1px solid var(--azul);
-    border-radius: 5px;
-
-    padding: 15px;
-    font-size: 18px;
-
+    width: 100%;
+    height: 36px;
+    border: 1px solid #d5d9e0;
+    border-radius: 10px;
+    padding: 0 12px;
+    font-size: 12px;
     box-sizing: border-box;
+    transition: border-color 0.15s ease;
+    background: #f3efef;
+    color: black;
+}
+
+.login-input:focus {
+    outline: none;
+    border-color: var(--azul, #2563eb);
+}
+
+.login-input.input-erro {
+    border-color: #d64545;
+    background-color: #fef6f6;
+}
+
+.input-erro-mensagem {
+    margin-top: 4px;
+    font-size: 10px;
+    color: #d64545;
 }
 
 /* Botão */
 
 .login-button {
-    width: 52.5%;
-    height: 50px;
+    width: 100%;
+    max-width: 320px;
 
-    background-color: var(--azul-mais-escuro);
+    height: 38px;
+
+    background-color: rgb(0, 80, 180);
+
     color: white;
 
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
 
-    font-size: 18px;
+    font-size: 12px;
+    font-weight: 600;
+
     cursor: pointer;
 
-    margin: 20px;
+    margin: 4px 0 0;
+
+    transition: opacity 0.15s ease;
+}
+
+.login-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.login-button:not(:disabled):hover {
+    opacity: 0.9;
+}
+
+.Toastify__toast {
+    height: 35px;
+    padding: 8px 10px;
+    font-size: 11px;
+    border-radius: 10px;
+}
+
+.Toastify__toast-body {
+    padding: 0;
+    font-size: 11px;
+}
+
+.Toastify__close-button {
+    align-self: center;
+}
+
+/* ======================= */
+/* Responsivo — mobile     */
+/* ======================= */
+
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    /* Banner de imagem no topo, não tela cheia */
+    .login-image-container {
+        width: 100%;
+        height: 160px;
+        flex-shrink: 0;
+    }
+
+    .login-imagem-desktop {
+        display: none;
+    }
+
+    .login-imagem-mobile {
+        display: block;
+    }
+
+    /* Some com o texto grande de desktop, mostra o banner "EduBlog Mobile" */
+    .login-image-text {
+        display: none;
+    }
+
+    .login-mobile-banner {
+        display: flex;
+    }
+
+    /* Formulário ocupa a largura toda, com padding fixo */
+    .login-form {
+        width: 100%;
+        height: auto;
+        padding: 24px 20px 40px;
+        align-items: stretch;
+        background-color: white;
+    }
+
+    /* Esconde cabeçalho de desktop, mostra o mobile */
+    .login-header,
+    .login-subtitle {
+        display: none;
+    }
+
+    .login-mobile-title,
+    .login-mobile-subtitle {
+        display: block;
+    }
+
+    .input-container,
+    .login-alert,
+    .login-button,
+    .login-forgot-password {
+        max-width: none;
+    }
+
+    .login-forgot-password {
+        text-align: center;
+        margin-top: 8px;
+    }
 }

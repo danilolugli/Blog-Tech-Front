@@ -13,6 +13,7 @@ const Login: React.FC = () => {
     const [loading, setLoading] = useState(false);
 
     const handleLogin = async () => {
+
         try {
             setLoading(true);
             const response = await loginController({
@@ -25,18 +26,15 @@ const Login: React.FC = () => {
                 JSON.stringify(response.usuario)
             );
 
-            toast.success("Login realizado com sucesso!", {
-                autoClose: 3000,
-            });
             setTimeout(() => {
-                toast.info("Direcionando para a tela inicial", {
-                    autoClose: 3500,
+                toast.success("Login realizado com sucesso!", {
+                    autoClose: 3000,
                     onClose: () => {
                         navigate("/listar");
                     },
                 });
             }, 100);
-            
+
         } catch (error) {
             if (error instanceof Error) {
                 toast.warning(error.message);
@@ -51,19 +49,59 @@ const Login: React.FC = () => {
         <div className="login-container">
             <div className="login-image-container">
                 <img
-                    src="src/assets/logoTexto.jpeg"
+                    src="src/assets/fundo-login.png"
                     alt="Imagem logotipo login"
-                    className="login-imagem"
+                    className="login-imagem login-imagem-desktop"
                 />
+                <img
+                    src="src/assets/fundo-login-mobile.png"
+                    alt="Imagem logotipo login"
+                    className="login-imagem login-imagem-mobile"
+                />
+
+                <div className="login-image-text">
+                    <h3 className="title-imagem">
+                        Transforme a aprendizagem em uma jornada diária.
+                    </h3>
+
+                    <p className="description">
+                        Crie salas de aula vibrantes, troque experiências reais e dê voz
+                        aos seus melhores projetos educacionais.
+                    </p>
+                </div>
+
+                <div className="login-mobile-banner">
+                    <img
+                        src="src/assets/logo.png"
+                        alt="Imagem logotipo login"
+                        className="login-logo-img login-logo-img--mobile"
+                    />
+                    <span className="login-mobile-banner-title">
+                        EduBlog Mobile
+                    </span>
+                </div>
             </div>
 
             <div className="login-form">
-                <h1 className="login-title">
-                    Login
-                </h1>
+                <div className="login-header">
+                    <img src="src/assets/logo.png"
+                        alt="Imagem logotipo login"
+                        className="login-logo-img" />
+                    <h1 className="login-title">
+                        Blog Tech
+                    </h1>
+                </div>
 
                 <p className="login-subtitle">
-                    Entre para gerenciar seu conteúdo educacional
+                    Bem-vindo! Por favor, insira suas credenciais.
+                </p>
+
+                <h1 className="login-mobile-title">
+                    Entrar
+                </h1>
+
+                <p className="login-mobile-subtitle">
+                    Seja bem-vindo de volta ao seu espaço.
                 </p>
 
                 <div className="input-container">
@@ -71,14 +109,14 @@ const Login: React.FC = () => {
                         className="input-label"
                         htmlFor="email"
                     >
-                        E-mail
+                        Seu E-mail
                     </label>
 
                     <input
                         className="login-input"
                         id="email"
                         type="email"
-                        placeholder="professor@blogtech.com.br"
+                        placeholder="nome@escola.edu.br"
                         value={email}
                         onChange={(e) =>
                             setEmail(e.target.value)
@@ -98,7 +136,7 @@ const Login: React.FC = () => {
                         className="login-input"
                         id="senha"
                         type="password"
-                        placeholder="••••••••"
+                        placeholder="Insira sua senha"
                         value={senha}
                         onChange={(e) =>
                             setSenha(e.target.value)
