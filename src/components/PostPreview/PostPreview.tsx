@@ -16,8 +16,9 @@ const PostContainer = styled.div`
     width: 500px;
     height: 250px;
     background-color: white;
-    padding: 15px;
+    padding: 30px;
     gap: 20px;
+    text-align: left;
     &:active {
         transform: scale(0.98);}
     &:hover {
@@ -29,7 +30,8 @@ const PostInfo = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 8px;
-    margin: 0px 10px;
+    margin: 0px 5px;
+    pointer-events: none;
 `;
 
 const Professor = styled.label`
@@ -49,7 +51,7 @@ const PostContent = styled.div`
 `;
 
 const Titulo = styled.label`
-    font-size: 26px;
+    font-size: 22px;
     color: black;
     font-weight: 600;
     margin-bottom: 10px;
@@ -57,7 +59,7 @@ const Titulo = styled.label`
 `;
 
 const Descricao = styled.p`
-    font-size: 20px;
+    font-size: 18px;
     color: gray;
 `;
 

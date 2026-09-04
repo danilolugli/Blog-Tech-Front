@@ -1,4 +1,4 @@
-import Comentario from '../../components/Comentário/Comentario';
+import Comentario from '../../components/Comentario/Comentario';
 import './PostDetalhe.css';
 
 const PostDetalhe: React.FC = () =>  {
@@ -33,6 +33,13 @@ const PostDetalhe: React.FC = () =>  {
                     <Comentario professor={'Donald Trump'} data={new Date()} conteudo={'Nice'}></Comentario>
                 </li>
             </ul>
+        </div>
+
+        <hr className='linha' />
+
+        <div className='adicionarComentario'>
+            <textarea className='inputComentario' placeholder='Adicionar comentário...' ></textarea>
+            <button className='botaoComentario'>Enviar</button>
         </div>
     </section>
   )

@@ -23,7 +23,6 @@ const FooterContainer = styled.div`
 `;
 
 const PageContent = styled.div`
-  height: 100%;
 `;
 
 function MainLayout() {
