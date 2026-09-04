@@ -9,7 +9,7 @@ const AppContainer = styled.div`
 `;
 
 const Main = styled.main`
-  margin-left: 240px;
+  margin-left: 236px;
   height: 100vh;
 
   @media (max-width: 768px) {
