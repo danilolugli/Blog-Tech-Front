@@ -12,9 +12,14 @@ const ComentarioContainer = styled.div`
     justify-content: flex-start;
 `;
 
+const Linha = styled.hr`
+    border: 1px solid var(--azul-mais-claro);
+    width: 100%;
+`;
+
 const ComentarioInfo = styled.div`
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     gap: 0.5rem;
 `;
 
@@ -36,6 +41,7 @@ const Conteudo = styled.p`
 const Comentario = ({ professor, data, conteudo }: ComentarioProps) => {
     return (
         <ComentarioContainer>
+            <Linha></Linha>
             <ComentarioInfo>
                 <Professor>{professor}</Professor>
                 <Data>{data.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })}</Data>

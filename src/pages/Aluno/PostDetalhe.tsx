@@ -26,10 +26,10 @@ const PostDetalhe: React.FC = () =>  {
                 <li>
                     <Comentario professor={'Jubileu Jeferson'} data={new Date()} conteudo={'Gostei'}></Comentario>
                 </li>
-              <li>
+                <li>
                     <Comentario professor={'Felipe Massa'} data={new Date()} conteudo={'Conteúdo ágil!'}></Comentario>
                 </li>
-              <li>
+                <li>
                     <Comentario professor={'Donald Trump'} data={new Date()} conteudo={'Nice'}></Comentario>
                 </li>
             </ul>
