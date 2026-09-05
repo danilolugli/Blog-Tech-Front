@@ -1,0 +1,25 @@
+.app-container {
+  min-height: 100vh;
+}
+
+.main {
+  margin-left: 236px;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.footer-container {
+  margin-top: auto;
+}
+
+.page-content {
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .main {
+    margin-left: 0;
+    padding-top: 60px;
+  }
+}

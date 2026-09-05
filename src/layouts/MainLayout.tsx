@@ -1,51 +1,25 @@
-import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 
 import Footer from "../components/Footer/Footer";
 import SideBar from "../components/Sidebar/SideBar";
 
-const AppContainer = styled.div`
-  min-height: 100vh;
-`;
-
-const Main = styled.main`
-  margin-left: 236px;
-  height: 100vh;
-
-  @media (max-width: 768px) {
-    margin-left: 0;
-    padding-top: 60px;
-  }
-`;
-
-const FooterContainer = styled.div`
-  margin-top: auto;
-
-  @media (max-width: 768px) {
-    margin-left: 0;
-    padding-top: 60px;
-    width: 100%;
-  }
-`;
-
-const PageContent = styled.div`
-`;
+import "./MainLayout.css";
 
 function MainLayout() {
   return (
-    <AppContainer>
+    <div className="app-container">
       <SideBar />
 
-      <Main>
-        <PageContent>
+      <main className="main">
+        <div className="page-content">
           <Outlet />
-        </PageContent>
+        </div>
 
-        <FooterContainer>
+        <div className="footer-container">
           <Footer />
-        </FooterContainer>
-      </Main>
-    </AppContainer>
+        </div>
+      </main>
+    </div>
   );
 }
 
