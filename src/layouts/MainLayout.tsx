@@ -20,6 +20,12 @@ const Main = styled.main`
 
 const FooterContainer = styled.div`
   margin-top: auto;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    padding-top: 60px;
+    width: 100%;
+  }
 `;
 
 const PageContent = styled.div`

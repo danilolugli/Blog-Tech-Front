@@ -10,7 +10,7 @@ const SideBarContainer = styled.div<{ $isOpen: boolean }>`
   top: 0;
   left: 0;
   width: 240px;
-  height: 100vh;
+  height: 100%;
   box-sizing: border-box;
   padding: 20px;
   display: flex;

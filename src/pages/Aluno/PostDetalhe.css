@@ -88,3 +88,90 @@
 .botaoComentario:active {
     background-color: #2563eb;
 }
+
+@media (max-width: 768px) {
+
+    .postContainer {
+        width: 105%;
+        margin: 1rem;
+    }
+
+    .headerPost {
+        margin: 1.5rem;
+    }
+
+    .titulo {
+        font-size: 1.5rem;
+    }
+
+    .conteudo {
+        margin: 1.5rem;
+        text-indent: 15px;
+        line-height: 1.5;
+    }
+
+    .linha {
+        margin: 1rem 1.5rem;
+    }
+
+    .comentarios {
+        margin: 1.5rem 1.5rem 0 1.5rem;
+    }
+
+    .tituloComentario {
+        font-size: 1.25rem;
+    }
+
+    .adicionarComentario {
+        margin: 0 1.5rem 1.5rem 1.5rem;
+    }
+
+    .inputComentario {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .botaoComentario {
+        width: 100%;
+        margin: 1rem 0 0 0;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .postContainer {
+        width: 105%;
+        margin: 1rem;
+    }
+
+    .headerPost {
+        margin: 1rem;
+    }
+
+    .titulo {
+        font-size: 1.3rem;
+    }
+
+    .conteudo {
+        margin: 1rem;
+        text-indent: 10px;
+        font-size: 0.95rem;
+    }
+
+    .linha {
+        margin: 1rem;
+    }
+
+    .comentarios {
+        margin: 1rem 1rem 0 1rem;
+    }
+
+    .tituloComentario {
+        font-size: 1.15rem;
+    }
+
+    .adicionarComentario {
+        margin: 0 1rem 1rem 1rem;
+    }
+}

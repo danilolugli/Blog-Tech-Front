@@ -6,18 +6,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ListarPosts: React.FC = () =>  {
   return (
-    <>
+    <section className='listarPostsContainer'>
       <h1 className='titulo'>Posts Recentes</h1>
-      <header className='containerPesquisa'>   
-        <FontAwesomeIcon icon={faMagnifyingGlass} className='iconePesquisa' />
-        <input type="text" placeholder="Busque por palavras-chave" className="inputPesquisa" />
+      
+      <header className='headerPosts'>
+        <div className='containerPesquisa'>   
+          <FontAwesomeIcon icon={faMagnifyingGlass} className='iconePesquisa' />
+          <input type="text" placeholder="Busque por palavras-chave" className="inputPesquisa" />
+        </div>
+
+        <div className='btnCriarPost'>
+          <PostFormModal authorName={''} onSubmit={function (values: { title: string; content: string; subject: string; }, postId?: string): Promise<void> | void {
+            throw new Error('Function not implemented.');
+          } }></PostFormModal>
+        </div>
       </header>
       
-      <div className='btnCriarPost'>
-        <PostFormModal authorName={''} onSubmit={function (values: { title: string; content: string; subject: string; }, postId?: string): Promise<void> | void {
-          throw new Error('Function not implemented.');
-        } }></PostFormModal>
-      </div>
 
       <ul className='listaPosts'>
         <li>
@@ -69,7 +73,7 @@ const ListarPosts: React.FC = () =>  {
 
         <button><FontAwesomeIcon icon={faChevronRight} /></button>
       </nav>
-    </>
+    </section>
   );
 }
 

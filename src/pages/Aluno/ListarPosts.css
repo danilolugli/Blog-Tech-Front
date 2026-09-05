@@ -1,10 +1,23 @@
+.listarPostsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .titulo {
     font-weight: bold;
 }
 
+.headerPosts {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 12rem;
+}
+
 .containerPesquisa {
-    margin: 50px auto;
     position: relative;
+    margin: 50px auto;
     width: 40%;
     height: 40px;
     border: 1px solid #000000;
@@ -31,9 +44,7 @@
 }
 
 .btnCriarPost {
-    position: absolute;
-    right: 35px;
-    top: 110px;
+    margin: 3rem
 }
 
 .listaPosts {
@@ -94,4 +105,112 @@
 
 .numerosPagina li:active {
     transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+
+    .listarPostsContainer {
+        width: 100%;
+    }
+
+    .headerPosts {
+        margin-left: 2rem;
+        margin-right: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .containerPesquisa {
+        width: 70%;
+        margin: 30px auto;
+    }
+
+    .btnCriarPost {
+        margin: 1.5rem;
+    }
+
+    .listaPosts {
+        margin-top: 30px;
+        gap: 20px;
+        padding: 0 1rem;
+        box-sizing: border-box;
+    }
+
+    .paginacao {
+        margin: 30px 0;
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+
+    .numerosPagina {
+        gap: 10px;
+        margin: 20px;
+        flex-wrap: wrap;
+        height: auto;
+    }
+}
+
+
+/* ================================= */
+/* RESPONSIVIDADE - CELULARES */
+/* ================================= */
+
+@media (max-width: 480px) {
+
+    .headerPosts {
+        flex-direction: column;
+        margin: 1rem;
+        align-items: stretch;
+    }
+
+    .titulo {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .containerPesquisa {
+        width: 100%;
+        margin: 20px 0;
+        box-sizing: border-box;
+    }
+
+    .inputPesquisa {
+        font-size: 14px;
+    }
+
+    .btnCriarPost {
+        margin: 1rem auto;
+    }
+
+    .listaPosts {
+        margin-top: 20px;
+        gap: 15px;
+        padding: 0 0.5rem;
+    }
+
+    .paginacao {
+        margin: 20px 0 30px 0;
+        gap: 5px;
+    }
+
+    .paginacao button {
+        width: 35px;
+        height: 35px;
+    }
+
+    .numerosPagina {
+        font-size: 16px;
+        gap: 5px;
+        margin: 15px 5px;
+    }
+
+    .numerosPagina li {
+        width: 35px;
+        height: 35px;
+        padding: 5px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
