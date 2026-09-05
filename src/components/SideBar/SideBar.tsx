@@ -158,7 +158,7 @@ const SideBar: React.FC = () => {
                         color="var(--azul-mais-claro)"
                     />
                 </MobileToggleButton>
-                <img src="/src/assets/logo2.jpeg" alt="Logo BlogTech" className="mobile-header-logo" />
+                <img src="/src/assets/logo.png" alt="Logo BlogTech" className="mobile-header-logo" />
                 <MobileHeaderTitle>BlogTech</MobileHeaderTitle>
             </MobileHeader>
 
@@ -166,7 +166,7 @@ const SideBar: React.FC = () => {
 
             <SideBarContainer $isOpen={isOpen}>
                 <SidebarHeaderInternal className="sidebar-header">
-                    <img src="/src/assets/logo2.jpeg" alt="Logo BlogTech" className="sidebar-logo" />
+                    <img src="/src/assets/logo.png" alt="Logo BlogTech" className="sidebar-logo" />
                     <SideBarTitle>BlogTech</SideBarTitle>
                 </SidebarHeaderInternal>
 

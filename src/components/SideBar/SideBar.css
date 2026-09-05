@@ -7,9 +7,10 @@
 }
 
 .sidebar-logo {
-    width: 20%;
+    width: 70px;
     height: auto;
     border-radius: 10%;
+    background-color: white;
 }
 
 .barraSair {
@@ -27,4 +28,6 @@
     border-radius: 10%;
     object-fit: cover;
     flex-shrink: 0;
+    background-color: white;
+    border-radius: 10%;
 }
