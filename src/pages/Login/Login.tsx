@@ -25,6 +25,11 @@ const Login: React.FC = () => {
                 "usuario",
                 JSON.stringify(response.usuario)
             );
+            
+            sessionStorage.setItem(
+                "token",
+                response.token
+            );
 
             setTimeout(() => {
                 toast.success("Login realizado com sucesso!", {

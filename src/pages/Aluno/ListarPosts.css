@@ -107,6 +107,11 @@
     transform: scale(0.95);
 }
 
+.numeroPagina {
+    color: black;
+    margin: 0 1rem;
+}
+
 @media (max-width: 768px) {
 
     .listarPostsContainer {
@@ -149,11 +154,6 @@
         height: auto;
     }
 }
-
-
-/* ================================= */
-/* RESPONSIVIDADE - CELULARES */
-/* ================================= */
 
 @media (max-width: 480px) {
 

@@ -4,13 +4,13 @@ interface PostPreviewProps {
     titulo: string;
     descricao: string;
     professor: string;
-    data: Date;
+    data: string;
 }
 
 const PostContainer = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     border: 1.5px solid gray;
     border-radius: 15px;
     width: 500px;
@@ -68,7 +68,7 @@ const PostPreview = ({ titulo, descricao, professor, data }: PostPreviewProps) =
         <PostContainer>
             <PostInfo>
                 <Professor>{professor}</Professor>
-                <Data>{data.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })}</Data>
+                <Data>{data}</Data>
             </PostInfo>
             <PostContent>
                 <Titulo>{titulo}</Titulo>
