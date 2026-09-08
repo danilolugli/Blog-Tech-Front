@@ -23,7 +23,7 @@ const Login: React.FC = () => {
 
             sessionStorage.setItem(
                 "usuario",
-                JSON.stringify(response.usuario)
+                JSON.stringify(response.user)
             );
             
             sessionStorage.setItem(
