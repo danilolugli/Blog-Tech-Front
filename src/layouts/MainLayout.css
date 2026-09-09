@@ -11,12 +11,8 @@
   flex-direction: column;
 }
 
-.footer-container {
-  margin-top: auto;
-}
-
 .page-content {
-  height: 100vh;
+  height: 130vh;
   flex: 1;
 }
 

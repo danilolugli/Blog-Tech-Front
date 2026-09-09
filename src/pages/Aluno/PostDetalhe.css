@@ -1,7 +1,8 @@
 .postContainer {
     border: 1px solid var(--azul);
     border-radius: 10px;
-    margin: 4rem;
+    margin: 5rem 8rem;
+    min-height: 110vh;
 }
 
 .titulo {

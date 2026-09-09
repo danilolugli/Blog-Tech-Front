@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect } from 'react';
 import { listarPosts } from './Posts.controller';
 import { pesquisarPosts } from '../../services/post/postService';
+import { useNavigate } from 'react-router-dom';
 
 export interface Post {
   id: number;
@@ -18,8 +19,10 @@ export interface Post {
 }
 
 const ListarPosts: React.FC = () =>  {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [paginaAtual, setPaginaAtual] = useState(1);
+    const [posts, setPosts] = useState<Post[]>([]);
+    const [paginaAtual, setPaginaAtual] = useState(1);
+    const navigate = useNavigate();
+    const perfil = sessionStorage.getItem("perfil");
 
     useEffect(() => {
         buscarPosts();
@@ -67,16 +70,17 @@ const ListarPosts: React.FC = () =>  {
           }} />
         </div>
 
-        <div className='btnCriarPost'>
+        { perfil!="1" && (<div className='btnCriarPost'>
           <PostFormModal authorName={''} onSubmit={function (values: { title: string; content: string; subject: string; }, postId?: string): Promise<void> | void {
             throw new Error('Function not implemented.');
           } }></PostFormModal>
-        </div>
+        </div>)}
+
       </header>
 
       <ul className='listaPosts'>
         {posts.map((post) => (
-          <li key={post.id}>
+          <li key={post.id} onClick={() => {navigate(`/post-detalhe/${post.id}`)}}>
             <PostPreview titulo={post.titulo} 
             descricao={post.conteudo} 
             professor={post.autor} 

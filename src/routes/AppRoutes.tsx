@@ -11,14 +11,6 @@ import Users from "../pages/Users/Users";
 import ListarPosts from "../pages/Aluno/ListarPosts";
 import PostDetalhe from "../pages/Aluno/PostDetalhe";
 
-function Home() {
-  return <h1>Home</h1>;
-}
-
-function Posts() {
-  return <h1>Posts</h1>;
-}
-
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -27,18 +19,16 @@ function AppRoutes() {
         {/* Página de login */}
         <Route path="/login" element={<Login />} />
 
-        {/* Páginas que usam Sidebar + Footer */}
+        {/* Páginas que usam Sidebar */}
         <Route element={<MainLayout />}>
 
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<ListarPosts />} />
 
-          <Route path="/posts" element={<Posts />} />
-
-          <Route path="/manage-users" element={<Users />} />
-
-          <Route path="/listar" element={<ListarPosts />} />
+          {/* <Route path="/manage-posts" element={<ManagePosts />} /> */}
 
           <Route path="/post-detalhe" element={<PostDetalhe />} />
+
+          <Route path="/manage-users" element={<Users />} />
 
         </Route>
 
