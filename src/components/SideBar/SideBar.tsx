@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import ButtonSideBar from '../ButtonSidebar/ButtonSideBar';
 import './SideBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClipboard, faGear, faHouse, faUsers, faBars, faXmark, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faClipboard, faHouse, faUsers, faBars, faXmark, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const SideBarContainer = styled.div<{ $isOpen: boolean }>`
   position: fixed;
@@ -145,8 +146,9 @@ const SidebarHeaderInternal = styled.div`
 `;
 
 const SideBar: React.FC = () => {
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const perfil = sessionStorage.getItem("perfil");
 
     return (
         <>
@@ -170,39 +172,37 @@ const SideBar: React.FC = () => {
                     <SideBarTitle>BlogTech</SideBarTitle>
                 </SidebarHeaderInternal>
 
-
                 <SideBarList>
-                    <ButtonSideBar>
+                    <ButtonSideBar onClick={() => {navigate("/home")}}>
                         <UserIcon icon={faHouse} size="lg" />
                         Home
                     </ButtonSideBar>
 
-                    <ButtonSideBar>
+                    {perfil!="1" && (
+                    <ButtonSideBar onClick={() => {navigate("/post-detalhe")}}>
                         <UserIcon icon={faClipboard} size="lg" />
                         Posts
-                    </ButtonSideBar>
+                    </ButtonSideBar>)}
 
-                    <ButtonSideBar>
+                    {perfil!="1" && (    
+                    <ButtonSideBar onClick={() => {navigate("/manage-users")}}>
                         <UserIcon icon={faUsers} size="lg" />
                         Usuários
-                    </ButtonSideBar>
-
-                    <ButtonSideBar>
-                        <UserIcon icon={faGear} size="lg" />
-                        Configurações
-                    </ButtonSideBar>
+                    </ButtonSideBar>)}
                 </SideBarList>
 
                 <div className="barraSair"></div>
 
-                {isLoggedIn && (
-                    <SideBarActions>
-                        <BotaoSair>
-                            <UserIcon icon={faRightFromBracket} size="lg" />
-                            Sair
-                        </BotaoSair>
-                    </SideBarActions>
-                )}
+                <SideBarActions>
+                    <BotaoSair onClick={() => {
+                      navigate("/login");
+                      sessionStorage.clear();
+                    }}>
+                        <UserIcon icon={faRightFromBracket} size="lg" />
+                        Sair
+                    </BotaoSair>
+                </SideBarActions>
+                
             </SideBarContainer>
         </>
     );

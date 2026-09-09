@@ -31,11 +31,16 @@ const Login: React.FC = () => {
                 response.token
             );
 
+            sessionStorage.setItem(
+                "perfil",
+                response.user.perfil_id
+            );
+
             setTimeout(() => {
                 toast.success("Login realizado com sucesso!", {
                     autoClose: 3000,
                     onClose: () => {
-                        navigate("/listar");
+                        navigate("/home");
                     },
                 });
             }, 100);
