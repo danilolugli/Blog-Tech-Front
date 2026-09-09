@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import styles from "./UserFormModal.module.css";
+import { toast } from "react-toastify";
+import { getUserByIdController } from "../../pages/Users/Users.controller";
 
 interface UserFormModalProps {
   isOpen: boolean;
@@ -57,14 +59,7 @@ export function UserFormModal({
 
     setLoading(true);
 
-    fetch(`/usuarios/${userId}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Erro ao carregar o usuário.");
-        }
-
-        return response.json();
-      })
+    getUserByIdController(userId)
       .then((user) => {
         setNome(user.nome);
         setEmail(user.email);
@@ -77,37 +72,36 @@ export function UserFormModal({
       .finally(() => {
         setLoading(false);
       });
+
   }, [isOpen, isEditing, userId]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (
-      !nome.trim() ||
-      !email.trim() ||
-      !cpf.trim() ||
-      !perfil ||
-      saving
-    ) {
+    if (!nome.trim() || !email.trim() || !cpf.trim() || !perfil || saving) {
       return;
     }
 
     setSaving(true);
 
     try {
-      await onSubmit(
-        {
-          nome,
-          email,
-          cpf,
-          perfil,
-        },
-        userId
+      await onSubmit({ nome, email, cpf, perfil }, userId);
+
+      toast.success(
+        isEditing
+          ? "Usuário atualizado com sucesso!"
+          : "Usuário criado com sucesso!"
       );
 
       onClose();
-    } catch {
-      setError("Não foi possível salvar o usuário.");
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.warning(error.message);
+      } else {
+        toast.error(
+          "Infelizmente tivemos um erro na conexão com a API. Tente novamente."
+        );
+      }
     } finally {
       setSaving(false);
     }
@@ -242,8 +236,8 @@ export function UserFormModal({
                 {saving
                   ? "Salvando..."
                   : isEditing
-                  ? "Salvar Alterações"
-                  : "Salvar"}
+                    ? "Salvar Alterações"
+                    : "Salvar"}
               </button>
             </div>
           </form>
