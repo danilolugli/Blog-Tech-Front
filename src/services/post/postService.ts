@@ -11,7 +11,7 @@ interface ListarPostPesquisaParams {
     pesquisa: string;
 }
 
-export function listarPostsUseCase(data: ListarPostParams) {
+export function listarTodosPosts(data: ListarPostParams) {
     const params = new URLSearchParams({
         paginaAtual: data.paginaAtual.toString(),
         itensPagina: data.itensPagina.toString()
@@ -37,6 +37,16 @@ export function pesquisarPosts(data: ListarPostPesquisaParams) {
     const token = sessionStorage.getItem("token");
 
     return api(`/posts/search?${params.toString()}`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });}
+    
+export function listarPostsId(id: number) {
+    const token = sessionStorage.getItem("token");
+
+    return api(`/posts/${id}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
