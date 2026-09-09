@@ -217,3 +217,140 @@
   color: #94a3b8 !important;
   font-weight: 400 !important;
 }
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 16px;
+  padding: 14px;
+  border-top: 1px solid #eef2f7;
+}
+
+.pagination button {
+  padding: 6px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background-color: white;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #eff6ff;
+  color: #2563eb;
+  border-color: #bfdbfe;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  color: #64748b;
+  font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  .pagination {
+    padding: 12px 4px 0;
+    margin-bottom: 5vh;
+  }
+}
+
+/* Mobile */
+@media (max-width: 820px) {
+  .users-page {
+    padding: 16px;
+    margin-bottom: 5vh;
+  }
+
+  .users-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .users-header h1 {
+    font-size: 20px;
+  }
+
+  .add-user-button {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .users-filters {
+    flex-direction: column;
+  }
+
+  .users-filters select {
+    width: 100%;
+  }
+
+  .users-table-container {
+    border: none;
+    background-color: transparent;
+    overflow-x: visible;
+  }
+
+  .users-table {
+    table-layout: auto;
+  }
+
+  .users-table thead {
+    display: none;
+  }
+
+  .users-table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .users-table tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px;
+  }
+
+  .users-table td {
+    border-top: none;
+    padding: 0;
+  }
+
+  .users-table td:nth-child(1) {
+    order: 1;
+    flex: 1;
+    font-size: 14px;
+  }
+
+  .users-table td:nth-child(3) {
+    order: 2;
+  }
+
+  .users-table td:nth-child(2) {
+    order: 3;
+    width: 100%;
+    margin-top: 4px;
+    color: #64748b;
+    font-size: 12px;
+  }
+
+  .users-table td:nth-child(4) {
+    order: 4;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .action-buttons {
+    justify-content: flex-end;
+  }
+}

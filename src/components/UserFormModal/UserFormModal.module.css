@@ -166,3 +166,44 @@
 
   cursor: not-allowed;
 }
+
+@media (max-width: 480px) {
+  .overlay {
+    padding: 16px;
+    box-sizing: border-box;
+    align-items: flex-end;
+  }
+
+  .modal {
+    max-width: 100%;
+    max-height: calc(100vh - 32px);
+    padding: 20px;
+    border-radius: 16px 16px 0 0; 
+  }
+
+  .modal h2 {
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+
+  .field {
+    margin-bottom: 14px;
+  }
+
+  .field input,
+  .field select {
+    height: 44px;
+    font-size: 16px;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .actions button {
+    width: 100%;
+    min-width: 0;
+  }
+}
