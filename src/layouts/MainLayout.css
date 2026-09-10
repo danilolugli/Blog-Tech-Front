@@ -14,6 +14,7 @@
 .page-content {
   height: 130vh;
   flex: 1;
+  background-color: #f8fafc;
 }
 
 @media (max-width: 768px) {

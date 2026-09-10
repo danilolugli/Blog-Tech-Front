@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 interface ComentarioProps {
     professor: string;
-    data: Date;
+    data: string;
     conteudo: string;
 }
 
@@ -44,7 +44,7 @@ const Comentario = ({ professor, data, conteudo }: ComentarioProps) => {
             <Linha></Linha>
             <ComentarioInfo>
                 <Professor>{professor}</Professor>
-                <Data>{data.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })}</Data>
+                <Data>{data}</Data>
             </ComentarioInfo>
             <Conteudo>{conteudo}</Conteudo>
         </ComentarioContainer>

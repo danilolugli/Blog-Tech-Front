@@ -5,6 +5,7 @@ import { listarPostsPorId } from './Posts.controller';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { criarComentario, listarComentarios } from './Comentario.controller';
 
 export interface Post {
   id: number;
@@ -16,12 +17,25 @@ export interface Post {
   autor: string;
 }
 
+export interface Comentario {
+    id: number,
+    conteudo: string,
+    post_id: number,
+    data_criacao: string,
+    data_atualizacao: string,
+    autor: string
+}
+
 const PostDetalhe: React.FC = () =>  {
     const [post, setPost] = useState<Post>();
-    const { id } = useParams();
+    const { id: postId } = useParams();
+    const [comentarios, setComentarios] = useState<Comentario[]>([]);
+    const [campoComentario, setCampoComentario] = useState("");
+    const perfilId = sessionStorage.getItem("perfil");
 
     useEffect(() =>  {
-        buscarPostPorId(Number(id));
+        buscarPostPorId(Number(postId));
+        buscarComentariosPorPostId(Number(postId));
     })
     
     async function buscarPostPorId(id: number) {
@@ -34,18 +48,41 @@ const PostDetalhe: React.FC = () =>  {
         }
     }
 
-  return (
+    async function buscarComentariosPorPostId(id: number) {
+        try {
+            const response = await listarComentarios(id);
+            setComentarios(response);
+
+        } catch (error) {
+            console.error("Erro ao buscar posts:", error);
+        }
+    }
+
+    async function enviarComentario(conteudo: string, post_id: number, autor_id: number) {
+        try {
+            const comentario = {conteudo, post_id, autor_id}
+            await criarComentario(comentario);
+
+        } catch (error) {
+            console.error("Erro ao buscar posts:", error);
+        }
+    }
+
+  return ( 
     <section className="postContainer">
         <header className="headerPost">
             <div className='tituloAndBotoes'>
                 <h1 className="titulo">{post?.titulo}</h1>
                 <div className='btnsHeader'>
+                {perfilId!="1" && (
                     <button className='botaoEditar' title="Editar">
                         <FontAwesomeIcon size="lg" color="var(--azul-mais-claro)" icon={faPencil} />
-                    </button>
+                    </button> )}
+
+                {perfilId!="1" && (
                     <button className='botaoExcluir' title="Excluir">
                         <FontAwesomeIcon size="lg" color="var(--azul-mais-claro)" icon={faTrash} />
-                    </button>
+                    </button>)}
                 </div>
             </div>
 
@@ -62,25 +99,26 @@ const PostDetalhe: React.FC = () =>  {
         <hr className='linha' />
 
         <div className="comentarios">
-            <label className="tituloComentario">Comentários (3)</label>
+            <label className="tituloComentario">Comentários ({comentarios.length})</label>
             <ul className="listaComentarios">
-                <li>
-                    <Comentario professor={'Jubileu Jeferson'} data={new Date()} conteudo={'Gostei'}></Comentario>
-                </li>
-                <li>
-                    <Comentario professor={'Felipe Massa'} data={new Date()} conteudo={'Conteúdo ágil!'}></Comentario>
-                </li>
-                <li>
-                    <Comentario professor={'Donald Trump'} data={new Date()} conteudo={'Nice'}></Comentario>
-                </li>
+                {comentarios.map((comentario) => (
+                <li key={comentario.id}>
+                    <Comentario 
+                        professor={comentario.autor} 
+                        data={formatarData(comentario.data_atualizacao)} 
+                        conteudo={comentario.conteudo}>   
+                    </Comentario>
+                </li>))}
             </ul>
         </div>
 
         <hr className='linha' />
 
         <div className='adicionarComentario'>
-            <textarea className='inputComentario' placeholder='Adicionar comentário...' ></textarea>
-            <button className='botaoComentario'>Enviar</button>
+            <textarea onChange={(e) => setCampoComentario(e.target.value)} className='inputComentario' placeholder='Adicionar comentário...' ></textarea>
+            <button className='botaoComentario' onClick={() => {
+                enviarComentario(campoComentario, Number(postId), Number(perfilId));
+            }}>Enviar</button>
         </div>
     </section>
   )

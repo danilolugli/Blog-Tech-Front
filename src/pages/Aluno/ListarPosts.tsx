@@ -71,7 +71,9 @@ const ListarPosts: React.FC = () =>  {
         </div>
 
         { perfil!="1" && (<div className='btnCriarPost'>
-          <PostFormModal authorName={''} onSubmit={function (values: { title: string; content: string; subject: string; }, postId?: string): Promise<void> | void {
+          <PostFormModal onSubmit={function (values: { title: string; content: string; subject: string; }, postId?: string): Promise<void> | void {
+            throw new Error('Function not implemented.');
+          } } isOpen={false} onClose={function (): void {
             throw new Error('Function not implemented.');
           } }></PostFormModal>
         </div>)}
