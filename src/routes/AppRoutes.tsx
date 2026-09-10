@@ -10,6 +10,7 @@ import Login from "../pages/Login/Login";
 import Users from "../pages/Users/Users";
 import ListarPosts from "../pages/Aluno/ListarPosts";
 import PostDetalhe from "../pages/Aluno/PostDetalhe";
+import PostManager from "../pages/PostManager/PostManager";
 
 function AppRoutes() {
   return (
@@ -28,7 +29,9 @@ function AppRoutes() {
 
           <Route path="/post-detalhe" element={<PostDetalhe />} />
 
-          <Route path="/manage-users" element={<Users />} />
+          <Route path="/manager-users" element={<Users />} />
+
+          <Route path="/manager-posts" element={<PostManager/>} />
 
         </Route>
 

@@ -179,16 +179,17 @@ const SideBar: React.FC = () => {
                     </ButtonSideBar>
 
                     {perfil!="1" && (
-                    <ButtonSideBar onClick={() => {navigate("/post-detalhe")}}>
+                    <ButtonSideBar onClick={() => {navigate("/manager-posts")}}>
                         <UserIcon icon={faClipboard} size="lg" />
                         Posts
                     </ButtonSideBar>)}
 
                     {perfil!="1" && (    
-                    <ButtonSideBar onClick={() => {navigate("/manage-users")}}>
+                    <ButtonSideBar onClick={() => {navigate("/manager-users")}}>
                         <UserIcon icon={faUsers} size="lg" />
                         Usuários
                     </ButtonSideBar>)}
+                    
                 </SideBarList>
 
                 <div className="barraSair"></div>

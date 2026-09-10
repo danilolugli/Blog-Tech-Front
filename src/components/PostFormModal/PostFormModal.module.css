@@ -126,14 +126,19 @@
 }
 
 .triggerButton {
-  background: #3b82f6;
-  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   border: none;
-  border-radius: 999px;
-  padding: 10px 20px;
-  font-size: 14px;
+  border-radius: 6px;
+  padding: 12px 18px;
+  background-color: #2563eb;
+  color: white;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
 }
 
 .triggerButton:hover {
@@ -160,4 +165,54 @@
 
 .field select option {
   height: 50px;
+}
+
+@media (max-width: 480px) {
+  .overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .modal {
+    max-width: 100%;
+    max-height: calc(100vh - 24px);
+    padding: 20px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .modal h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .field {
+    margin-bottom: 14px;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    font-size: 16px; 
+    padding: 10px 14px;
+  }
+
+  .field textarea {
+    min-height: 120px; 
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+
+  .triggerButton {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 16px;
+  }
 }

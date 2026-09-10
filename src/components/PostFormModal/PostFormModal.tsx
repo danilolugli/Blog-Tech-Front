@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import type { FormEvent } from "react"
+import type { FormEvent } from "react";
 import styles from "./PostFormModal.module.css";
+import { getPostByIdController } from "../../pages/PostManager/PostManager.controller";
 
 interface PostFormModalProps {
+  isOpen: boolean;
   postId?: string;
-  authorName: string;
+  onClose: () => void;
   onSubmit: (
     values: {
       title: string;
@@ -15,12 +17,27 @@ interface PostFormModalProps {
   ) => Promise<void> | void;
 }
 
+interface UsuarioLogado {
+  nome: string;
+}
+
+function getLoggedUserName(): string {
+  const raw = sessionStorage.getItem("usuario");
+
+  if (!raw) {
+    return "";
+  }
+
+  const usuario: UsuarioLogado = JSON.parse(raw);
+  return usuario.nome;
+}
+
 export function PostFormModal({
+  isOpen,
   postId,
-  authorName,
+  onClose,
   onSubmit,
 }: PostFormModalProps) {
-  const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
@@ -29,71 +46,45 @@ export function PostFormModal({
   const [error, setError] = useState("");
 
   const isEditing = !!postId;
+  const authorName = getLoggedUserName();
 
   const subjects = [
-    "Matemática",
-    "Português",
-    "Literatura",
-    "Redação",
-    "Inglês",
-    "Espanhol",
-    "História",
-    "Geografia",
-    "Filosofia",
-    "Sociologia",
-    "Física",
-    "Química",
-    "Biologia",
-    "Ciências",
-    "Artes",
-    "Educação Física",
-    "Informática",
-    "Programação",
-    "Robótica",
+    "Matemática", "Português", "Literatura", "Redação", "Inglês",
+    "Espanhol", "História", "Geografia", "Filosofia", "Sociologia",
+    "Física", "Química", "Biologia", "Ciências", "Artes",
+    "Educação Física", "Informática", "Programação", "Robótica",
     "Educação Financeira",
   ];
 
-  // Abre o modal e, caso seja edição, busca os dados do post
+  
   useEffect(() => {
-  if (!isOpen || !isEditing || !postId) return;
+    if (!isOpen) return;
 
-  fetch(`/posts/${postId}`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Erro ao carregar o post.");
-      }
+    setTitle("");
+    setSubject("");
+    setContent("");
+    setError("");
 
-      return response.json();
-    })
-    .then((post) => {
-      setTitle(post.title);
-      setSubject(post.subject);
-      setContent(post.content);
-    })
-    .catch(() => {
-      setError("Não foi possível carregar o post.");
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-}, [isOpen, isEditing, postId]);
-
-  function openModal(value: boolean) {
-    if (value) {
-      setTitle("");
-      setSubject("");
-      setContent("");
-      setError("");
-
-      if (isEditing) {
-        setLoading(true);
-      }
+    if (!isEditing || !postId) {
+        return;
     }
 
-    setIsOpen(value);
-  }
+    setLoading(true);
 
-  // Salva o formulário
+    getPostByIdController(postId)
+        .then((post) => {
+            setTitle(post.title);
+            setSubject(post.subject);
+            setContent(post.content);
+        })
+        .catch(() => {
+            setError("Não foi possível carregar o post.");
+        })
+        .finally(() => {
+            setLoading(false);
+        });
+}, [isOpen, isEditing, postId]);
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -104,16 +95,8 @@ export function PostFormModal({
     setSaving(true);
 
     try {
-      await onSubmit(
-        {
-          title,
-          subject,
-          content,
-        },
-        postId
-      );
-
-      openModal(false);
+      await onSubmit({ title, subject, content }, postId);
+      onClose();
     } catch {
       setError("Não foi possível salvar o post.");
     } finally {
@@ -122,147 +105,101 @@ export function PostFormModal({
   }
 
   const formIsValid =
-    title.trim() !== "" &&
-    subject !== "" &&
-    content.trim() !== "";
+    title.trim() !== "" && subject !== "" && content.trim() !== "";
+
+  if (!isOpen) {
+    return null;
+  }
 
   return (
-    <>
-      <button
-        type="button"
-        className={styles.triggerButton}
-        onClick={() => {
-          openModal(true);
-        }}
-      >
-        {isEditing ? "Editar Post" : "Novo Post"}
-      </button>
+    <div
+      className={styles.overlay}
+      onClick={(event) => {
+        if (event.target === event.currentTarget && !saving) {
+          onClose();
+        }
+      }}
+    >
+      <div className={styles.modal}>
+        <h2>{isEditing ? "Editar Conteúdo" : "Criar Conteúdo"}</h2>
 
-      {isOpen && (
-        <div
-          className={styles.overlay}
-          onClick={(event) => {
-            if (event.target === event.currentTarget) {
-              openModal(false);
-            }
-          }}
-        >
-          <div className={styles.modal}>
-            <h2>
-              {isEditing ? "Editar Conteúdo" : "Criar Conteúdo"}
-            </h2>
+        {error && <div className={styles.error}>{error}</div>}
 
-            {error && (
-              <div className={styles.error}>
-                {error}
-              </div>
-            )}
+        {loading ? (
+          <p>Carregando post...</p>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div className={styles.field}>
+              <label htmlFor="title">Título do Post</label>
+              <input
+                id="title"
+                type="text"
+                value={title}
+                onChange={(event) => setTitle(event.target.value)}
+                placeholder="Digite o título do post..."
+                disabled={saving}
+                autoFocus
+              />
+            </div>
 
-            {loading ? (
-              <p>Carregando post...</p>
-            ) : (
-              <form onSubmit={handleSubmit}>
-                <div className={styles.field}>
-                  <label htmlFor="title">
-                    Título do Post
-                  </label>
+            <div className={styles.field}>
+              <label htmlFor="subject">Matéria</label>
+              <select
+                id="subject"
+                value={subject}
+                onChange={(event) => setSubject(event.target.value)}
+                disabled={saving}
+              >
+                <option value="">Selecione uma matéria</option>
+                {subjects.map((subj) => (
+                  <option key={subj} value={subj}>
+                    {subj}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-                  <input
-                    id="title"
-                    type="text"
-                    value={title}
-                    onChange={(event) =>
-                      setTitle(event.target.value)
-                    }
-                    placeholder="Digite o título do post..."
-                    disabled={saving}
-                    autoFocus
-                  />
-                </div>
+            <div className={styles.field}>
+              <label htmlFor="author">Autor</label>
+              <input id="author" type="text" value={authorName} disabled />
+            </div>
 
-                <div className={styles.field}>
-                  <label htmlFor="subject">
-                    Matéria
-                  </label>
+            <div className={styles.field}>
+              <label htmlFor="content">Conteúdo do Post</label>
+              <textarea
+                id="content"
+                value={content}
+                onChange={(event) => setContent(event.target.value)}
+                placeholder="Escreva o conteúdo do seu post..."
+                disabled={saving}
+              />
+            </div>
 
-                  <select
-                    id="subject"
-                    value={subject}
-                    onChange={(event) =>
-                      setSubject(event.target.value)
-                    }
-                    disabled={saving}
-                  >
-                    <option value="">
-                      Selecione uma matéria
-                    </option>
+            <div className={styles.actions}>
+              <button
+                type="button"
+                className={styles.cancelButton}
+                onClick={onClose}
+                disabled={saving}
+              >
+                Cancelar
+              </button>
 
-                    {subjects.map((subject) => (
-                      <option key={subject} value={subject}>
-                        {subject}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className={styles.field}>
-                  <label htmlFor="author">
-                    Autor
-                  </label>
-
-                  <input
-                    id="author"
-                    type="text"
-                    value={authorName}
-                    disabled
-                  />
-                </div>
-
-                <div className={styles.field}>
-                  <label htmlFor="content">
-                    Conteúdo do Post
-                  </label>
-
-                  <textarea
-                    id="content"
-                    value={content}
-                    onChange={(event) =>
-                      setContent(event.target.value)
-                    }
-                    placeholder="Escreva o conteúdo do seu post..."
-                    disabled={saving}
-                  />
-                </div>
-
-                <div className={styles.actions}>
-                  <button
-                    type="button"
-                    className={styles.cancelButton}
-                    onClick={() => {
-                      openModal(false);
-                    }}
-                    disabled={saving}
-                  >
-                    Cancelar
-                  </button>
-
-                  <button
-                    type="submit"
-                    className={styles.submitButton}
-                    disabled={!formIsValid || saving}
-                  >
-                    {saving
-                      ? "Salvando..."
-                      : isEditing
-                        ? "Salvar Alterações"
-                        : "Publicar"}
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
-    </>
+              <button
+                type="submit"
+                className={styles.submitButton}
+                disabled={!formIsValid || saving}
+              >
+                {saving
+                  ? "Salvando..."
+                  : isEditing
+                  ? "Salvar Alterações"
+                  : "Publicar"}
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
+    </div>
   );
 }

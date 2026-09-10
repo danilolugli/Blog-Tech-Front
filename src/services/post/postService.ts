@@ -11,19 +11,21 @@ interface ListarPostPesquisaParams {
     pesquisa: string;
 }
 
+export interface PostPayload {
+    titulo: string;
+    conteudo: string;
+    disciplina: string;
+    autor: number;
+}
+
 export function listarPostsUseCase(data: ListarPostParams) {
     const params = new URLSearchParams({
         paginaAtual: data.paginaAtual.toString(),
         itensPagina: data.itensPagina.toString()
     });
 
-    const token = sessionStorage.getItem("token");
-
     return api(`/posts?${params.toString()}`, {
         method: "GET",
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
     });
 }
 
@@ -34,17 +36,36 @@ export function pesquisarPosts(data: ListarPostPesquisaParams) {
         pesquisa: data.pesquisa.toString()
     });
 
-    const token = sessionStorage.getItem("token");
-
     return api(`/posts/search?${params.toString()}`, {
         method: "GET",
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });}
+    });
+}
 
-export function criarPost() {}
+export function criarPost(payload: PostPayload) {
+    return api("/posts", {
+        method: "POST",
+        body: JSON.stringify(payload),
+    });
+}
 
-export function editarPost() {}
+export function getPostById(id: number) {
+    return api(`/posts/${id}`, {
+        method: "GET",
+    });
+}
 
-export function deletarPost() {}
+export function editarPost(id: number, payload: PostPayload) {
+    return api(`/posts/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(payload),
+    });
+}
+
+export function deletarPost(id: number, autor: number) {
+    return api(`/posts/${id}`, {
+        method: "DELETE",
+        body: JSON.stringify({
+            autor: autor
+        }),
+    });
+}
