@@ -107,7 +107,7 @@ const SideBarActions = styled(SideBarList)`
 
 const BotaoSair = styled.button`
   position: absolute;
-  height: 40px;
+  height: 45px;
   background-color: var(--azul-mais-escuro);
   color: var(--azul-mais-claro);
   border: 1px solid var(--azul-mais-claro);
@@ -124,6 +124,7 @@ const BotaoSair = styled.button`
   font-weight: 700;
   transition: background-color 0.3s ease;
   border-radius: 10px;
+  width: 9.5rem;
 
   &:hover {
     color: var(--azul);

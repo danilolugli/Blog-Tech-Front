@@ -27,7 +27,7 @@ function AppRoutes() {
 
           {/* <Route path="/manage-posts" element={<ManagePosts />} /> */}
 
-          <Route path="/post-detalhe" element={<PostDetalhe />} />
+          <Route path="/post-detalhe/:id" element={<PostDetalhe />} />
 
           <Route path="/manager-users" element={<Users />} />
 

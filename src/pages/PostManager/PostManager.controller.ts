@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import {
-    listarPostsUseCase,
+    listarTodosPosts,
     pesquisarPosts,
     criarPost,
     editarPost,
@@ -93,7 +93,7 @@ export function usePostsPage() {
                       itensPagina: ITEMS_PER_PAGE,
                       pesquisa: search.trim(),
                   })
-                : await listarPostsUseCase({
+                : await listarTodosPosts({
                       paginaAtual: currentPage,
                       itensPagina: ITEMS_PER_PAGE,
                   });
