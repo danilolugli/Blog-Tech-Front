@@ -5,9 +5,41 @@
     min-height: 110vh;
 }
 
+.tituloAndBotoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .titulo {
     font-size: 2rem;
     font-weight: bold;
+}
+
+.btnsHeader {
+    display: flex;
+    gap: 16px;
+}
+
+.botaoEditar, .botaoExcluir {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.botaoEditar {
+    background-color: var(--azul); 
+}
+
+.botaoExcluir {
+    background-color: red; 
+}
+
+.botaoEditar:active, .botaoExcluir:active {
+    transform: scale(0.95);
 }
 
 .headerPost {

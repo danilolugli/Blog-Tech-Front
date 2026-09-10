@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Comentario from '../../components/Comentario/Comentario';
 import './PostDetalhe.css';
 import { listarPostsPorId } from './Posts.controller';
 import { useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export interface Post {
   id: number;
@@ -17,7 +19,10 @@ export interface Post {
 const PostDetalhe: React.FC = () =>  {
     const [post, setPost] = useState<Post>();
     const { id } = useParams();
-    buscarPostPorId(Number(id));
+
+    useEffect(() =>  {
+        buscarPostPorId(Number(id));
+    })
     
     async function buscarPostPorId(id: number) {
         try {
@@ -32,7 +37,18 @@ const PostDetalhe: React.FC = () =>  {
   return (
     <section className="postContainer">
         <header className="headerPost">
-            <h1 className="titulo">{post?.titulo}</h1>
+            <div className='tituloAndBotoes'>
+                <h1 className="titulo">{post?.titulo}</h1>
+                <div className='btnsHeader'>
+                    <button className='botaoEditar' title="Editar">
+                        <FontAwesomeIcon size="lg" color="var(--azul-mais-claro)" icon={faPencil} />
+                    </button>
+                    <button className='botaoExcluir' title="Excluir">
+                        <FontAwesomeIcon size="lg" color="var(--azul-mais-claro)" icon={faTrash} />
+                    </button>
+                </div>
+            </div>
+
             <div>Professor(a) {post?.autor}</div>
             <div>Publicado em {formatarData(post?.data_atualizacao)}</div>
         </header>
