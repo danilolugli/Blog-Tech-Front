@@ -13,15 +13,17 @@ import PostDetalhe from "../pages/Aluno/PostDetalhe";
 import PostManager from "../pages/PostManager/PostManager";
 
 function AppRoutes() {
+  const token = sessionStorage.getItem("token");
   return (
     <BrowserRouter>
       <Routes>
 
         {/* Página de login */}
         <Route path="/login" element={<Login />} />
-
-        {/* Páginas que usam Sidebar */}
-        <Route element={<MainLayout />}>
+ 
+        { token && 
+          (<Route element={<MainLayout />} >
+                    
 
           <Route path="/home" element={<ListarPosts />} />
 
@@ -33,7 +35,7 @@ function AppRoutes() {
 
           <Route path="/manager-posts" element={<PostManager/>} />
 
-        </Route>
+        </Route>)}
 
 
         {/* Página inexistente */}

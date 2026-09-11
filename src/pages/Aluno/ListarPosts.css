@@ -79,6 +79,11 @@
     cursor: pointer;
 }
 
+.paginacao button:disabled {
+    border: 1px solid gray;
+    cursor: not-allowed;
+}
+
 .paginacao button:active {
     transform: scale(0.95);
 }

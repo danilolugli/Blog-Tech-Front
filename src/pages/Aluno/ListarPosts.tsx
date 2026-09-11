@@ -71,11 +71,12 @@ const ListarPosts: React.FC = () =>  {
         </div>
 
         { perfil!="1" && (<div className='btnCriarPost'>
-          <PostFormModal onSubmit={function (values: { title: string; content: string; subject: string; }, postId?: string): Promise<void> | void {
+          <PostFormModal isOpen={false} onClose={function (): void {
             throw new Error('Function not implemented.');
-          } } isOpen={false} onClose={function (): void {
+          } } onSubmit={function (values: { title: string; content: string; subject: string; }, postId?: string): Promise<void> | void {
             throw new Error('Function not implemented.');
-          } }></PostFormModal>
+          } }>
+          </PostFormModal>
         </div>)}
 
       </header>
@@ -92,7 +93,7 @@ const ListarPosts: React.FC = () =>  {
       </ul>
 
       <nav className='paginacao'>
-        <button onClick={() => {
+        <button disabled={paginaAtual==1} onClick={() => {
           buscarPosts(paginaAtual - 1);
         }}>
           <FontAwesomeIcon icon={faChevronLeft} />
@@ -100,13 +101,7 @@ const ListarPosts: React.FC = () =>  {
 
         <label className='numeroPagina'>Página {paginaAtual}</label>
 
-        {/* <ul className='numerosPagina'>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-        </ul> */}
-
-        <button onClick={() => {
+        <button disabled={posts.length < 6} onClick={() => {
           buscarPosts(paginaAtual + 1);
         }}>
           <FontAwesomeIcon icon={faChevronRight} />

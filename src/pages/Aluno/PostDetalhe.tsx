@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { criarComentario, listarComentarios } from './Comentario.controller';
+import { getUserById } from '../../services/Users/usersService';
 
 export interface Post {
   id: number;
@@ -26,16 +27,27 @@ export interface Comentario {
     autor: string
 }
 
+export interface User {
+    id: number,
+    nome: string,
+    email: string,
+    senha: string,
+    perfil_id: string,
+    cpf: string
+}
+
 const PostDetalhe: React.FC = () =>  {
     const [post, setPost] = useState<Post>();
     const { id: postId } = useParams();
     const [comentarios, setComentarios] = useState<Comentario[]>([]);
     const [campoComentario, setCampoComentario] = useState("");
     const perfilId = sessionStorage.getItem("perfil");
+    const [user, setUser] = useState<User>();
 
     useEffect(() =>  {
         buscarPostPorId(Number(postId));
         buscarComentariosPorPostId(Number(postId));
+        if (post) buscarUserPorId(Number(post.autor));
     })
     
     async function buscarPostPorId(id: number) {
@@ -44,7 +56,7 @@ const PostDetalhe: React.FC = () =>  {
             setPost(response);
 
         } catch (error) {
-            console.error("Erro ao buscar posts:", error);
+            console.error("Erro ao buscar post por id:", error);
         }
     }
 
@@ -54,7 +66,7 @@ const PostDetalhe: React.FC = () =>  {
             setComentarios(response);
 
         } catch (error) {
-            console.error("Erro ao buscar posts:", error);
+            console.error("Erro ao buscar comentários por postId:", error);
         }
     }
 
@@ -64,7 +76,17 @@ const PostDetalhe: React.FC = () =>  {
             await criarComentario(comentario);
 
         } catch (error) {
-            console.error("Erro ao buscar posts:", error);
+            console.error("Erro ao enviar comentário:", error);
+        }
+    }
+
+    async function buscarUserPorId(autorId: number) {
+        try {
+            const response = await getUserById(autorId);
+            setUser(response)
+
+        } catch (error) {
+            console.error("Erro ao buscar usuário por id:", error);
         }
     }
 
@@ -86,7 +108,7 @@ const PostDetalhe: React.FC = () =>  {
                 </div>
             </div>
 
-            <div>Professor(a) {post?.autor}</div>
+            <div>Professor(a) {user?.nome}</div>
             <div>Publicado em {formatarData(post?.data_atualizacao)}</div>
         </header>
 
