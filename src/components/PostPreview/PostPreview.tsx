@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import './PostPreview.css';
 
 interface PostPreviewProps {
     titulo: string;
@@ -7,83 +7,19 @@ interface PostPreviewProps {
     data: string;
 }
 
-const PostContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    border: 1.5px solid gray;
-    border-radius: 15px;
-    width: 500px;
-    height: 250px;
-    background-color: white;
-    padding: 30px;
-    gap: 20px;
-    text-align: left;
-    overflow: hidden; 
-    box-sizing: border-box;
-    &:active {
-        transform: scale(0.98);}
-    &:hover {
-        border: 1.5px solid var(--azul);
-        cursor: pointer;}
-`;
-
-const PostInfo = styled.div`
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    margin: 0px 5px;
-    pointer-events: none;
-`;
-
-const Professor = styled.label`
-    font-size: 18px;
-    color: black;
-`;
-
-const Data = styled.label`
-    font-size: 16px;
-    color: gray;
-`;
-
-const PostContent = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-`;
-
-const Titulo = styled.label`
-    font-size: 22px;
-    color: black;
-    font-weight: 600;
-    margin-bottom: 10px;
-    pointer-events: none;
-`;
-
-const Descricao = styled.p`
-    font-size: 18px;
-    color: gray;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin: 0; 
-`;
-
 const PostPreview = ({ titulo, descricao, professor, data }: PostPreviewProps) => {
     return (
-        <PostContainer>
-            <PostInfo>
-                <Professor>{professor}</Professor>
-                <Data>{data}</Data>
-            </PostInfo>
-            <PostContent>
-                <Titulo>{titulo}</Titulo>
-                <Descricao>{descricao}</Descricao>
-            </PostContent>    
-        </PostContainer>
-    )
-}
+        <div className="postContainer">
+            <div className="postInfo">
+                <label className="professor">{professor}</label>
+                <label className="data">{data}</label>
+            </div>
+            <div className="postContent">
+                <label className="titulo">{titulo}</label>
+                <p className="descricao">{descricao}</p>
+            </div>
+        </div>
+    );
+};
 
 export default PostPreview;
