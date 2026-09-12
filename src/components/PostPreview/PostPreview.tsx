@@ -19,6 +19,8 @@ const PostContainer = styled.div`
     padding: 30px;
     gap: 20px;
     text-align: left;
+    overflow: hidden; 
+    box-sizing: border-box;
     &:active {
         transform: scale(0.98);}
     &:hover {
@@ -61,6 +63,12 @@ const Titulo = styled.label`
 const Descricao = styled.p`
     font-size: 18px;
     color: gray;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0; 
 `;
 
 const PostPreview = ({ titulo, descricao, professor, data }: PostPreviewProps) => {

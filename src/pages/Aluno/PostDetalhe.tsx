@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { criarComentario, listarComentarios } from './Comentario.controller';
 import { getUserById } from '../../services/Users/usersService';
+import { toast } from "react-toastify";
 
 export interface Post {
   id: number;
@@ -42,13 +43,14 @@ const PostDetalhe: React.FC = () =>  {
     const [comentarios, setComentarios] = useState<Comentario[]>([]);
     const [campoComentario, setCampoComentario] = useState("");
     const perfilId = sessionStorage.getItem("perfil");
+    const usuario = sessionStorage.getItem("usuario");
     const [user, setUser] = useState<User>();
 
     useEffect(() =>  {
         buscarPostPorId(Number(postId));
         buscarComentariosPorPostId(Number(postId));
         if (post) buscarUserPorId(Number(post.autor));
-    })
+    },[])
     
     async function buscarPostPorId(id: number) {
         try {
@@ -70,11 +72,14 @@ const PostDetalhe: React.FC = () =>  {
         }
     }
 
-    async function enviarComentario(conteudo: string, post_id: number, autor_id: number) {
+    async function enviarComentario(conteudo: string, post_id: number) { 
+        const usuarioObj = usuario ? JSON.parse(usuario) : null;
         try {
-            const comentario = {conteudo, post_id, autor_id}
+            const comentario = {conteudo, post_id, autor_id: usuarioObj?.id}
             await criarComentario(comentario);
-
+            await buscarComentariosPorPostId(Number(postId));
+            setCampoComentario("")
+            toast.success("Comentário criado com sucesso!");
         } catch (error) {
             console.error("Erro ao enviar comentário:", error);
         }
@@ -90,7 +95,8 @@ const PostDetalhe: React.FC = () =>  {
         }
     }
 
-  return ( 
+  return (
+    <>
     <section className="postContainer">
         <header className="headerPost">
             <div className='tituloAndBotoes'>
@@ -115,7 +121,7 @@ const PostDetalhe: React.FC = () =>  {
         <hr className='linha' />
 
         <main className="conteudo">
-           {post?.titulo}
+           {post?.conteudo}
         </main>
         
         <hr className='linha' />
@@ -137,12 +143,13 @@ const PostDetalhe: React.FC = () =>  {
         <hr className='linha' />
 
         <div className='adicionarComentario'>
-            <textarea onChange={(e) => setCampoComentario(e.target.value)} className='inputComentario' placeholder='Adicionar comentário...' ></textarea>
+            <textarea value={campoComentario} onChange={(e) => setCampoComentario(e.target.value)} className='inputComentario' placeholder='Adicionar comentário...' ></textarea>
             <button className='botaoComentario' onClick={() => {
-                enviarComentario(campoComentario, Number(postId), Number(perfilId));
+                enviarComentario(campoComentario, Number(postId));
             }}>Enviar</button>
         </div>
     </section>
+    </>
   )
 };
 

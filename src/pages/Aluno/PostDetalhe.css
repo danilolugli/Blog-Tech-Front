@@ -1,13 +1,14 @@
-.background {
-
+* {
+    box-sizing: border-box;
 }
 
 .postContainer {
-    border: 1px solid var(--azul);
-    border-radius: 10px;
-    margin: 5rem 8rem;
-    min-height: 110vh;
     background-color: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 .tituloAndBotoes {
@@ -61,10 +62,12 @@
     text-align: left;
     text-indent: 30px;
     line-height: 1.5;
+    color: black;
+    white-space: pre-wrap;
 }
 
 .linha {
-    border: 1px solid gray;
+    border: 1px solid black;
     margin: 1rem 3rem;
 }
 
