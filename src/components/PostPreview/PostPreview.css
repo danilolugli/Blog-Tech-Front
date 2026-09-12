@@ -1,4 +1,4 @@
-.postContainer {
+.postPreview-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -16,16 +16,16 @@
     box-sizing: border-box;
 }
 
-.postContainer:active {
+.postPreview-container:active {
     transform: scale(0.98);
 }
 
-.postContainer:hover {
+.postPreview-container:hover {
     border: 1.5px solid var(--azul);
     cursor: pointer;
 }
 
-.postInfo {
+.postPreview-info {
     display: flex;
     justify-content: space-between;
     gap: 8px;
@@ -33,24 +33,24 @@
     pointer-events: none;
 }
 
-.professor {
+.postPreview-professor {
     font-size: 18px;
     color: black;
 }
 
-.data {
+.postPreview-data {
     font-size: 16px;
     color: gray;
     white-space: nowrap;
 }
 
-.postContent {
+.postPreview-content {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
-.titulo {
+.postPreview-titulo {
     font-size: 22px;
     color: black;
     font-weight: 600;
@@ -63,7 +63,7 @@
     text-overflow: ellipsis;
 }
 
-.descricao {
+.postPreview-descricao {
     font-size: 18px;
     color: gray;
     display: -webkit-box;
@@ -75,7 +75,7 @@
 }
 
 @media (max-width: 768px) {
-    .postContainer {
+    .postPreview-container {
         width: 100%;
         height: auto;
         min-height: 220px;
@@ -83,36 +83,36 @@
         gap: 12px;
     }
 
-    .titulo {
+    .postPreview-titulo {
         font-size: 20px;
     }
 
-    .descricao {
+    .postPreview-descricao {
         font-size: 16px;
         -webkit-line-clamp: 3;
     }
 }
 
 @media (max-width: 480px) {
-    .postContainer {
+    .postPreview-container {
         padding: 15px;
         border-radius: 10px;
     }
 
-    .professor {
+    .postPreview-professor {
         font-size: 16px;
     }
 
-    .data {
+    .postPreview-data {
         font-size: 14px;
     }
 
-    .titulo {
+    .postPreview-titulo {
         font-size: 18px;
         -webkit-line-clamp: 2;
     }
 
-    .descricao {
+    .postPreview-descricao {
         font-size: 14px;
         -webkit-line-clamp: 3;
     }

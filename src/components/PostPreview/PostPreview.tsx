@@ -9,14 +9,14 @@ interface PostPreviewProps {
 
 const PostPreview = ({ titulo, descricao, professor, data }: PostPreviewProps) => {
     return (
-        <div className="postContainer">
-            <div className="postInfo">
-                <label className="professor">{professor}</label>
-                <label className="data">{data}</label>
+        <div className="postPreview-container">
+            <div className="postPreview-info">
+                <label className="postPreview-professor">{professor}</label>
+                <label className="postPreview-data">{data}</label>
             </div>
-            <div className="postContent">
-                <label className="titulo">{titulo}</label>
-                <p className="descricao">{descricao}</p>
+            <div className="postPreview-content">
+                <label className="postPreview-titulo">{titulo}</label>
+                <p className="postPreview-descricao">{descricao}</p>
             </div>
         </div>
     );
