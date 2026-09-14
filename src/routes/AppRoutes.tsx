@@ -17,9 +17,6 @@ function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        
-        {/* Rota inicial */}
-        <Route path="/" element={<Login/>} />
 
         {/* Página de login */}
         <Route path="/login" element={<Login />} />
