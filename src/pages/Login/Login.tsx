@@ -5,6 +5,9 @@ import "./Login.css";
 
 import { loginController } from "./Login.controller";
 import { useNavigate } from "react-router-dom";
+import fundoLogin from "../../assets/fundo-login.png";
+import fundoLoginMobile from "../../assets/fundo-login-mobile.png";
+import logo from "../../assets/logo.png";
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
@@ -59,12 +62,12 @@ const Login: React.FC = () => {
         <div className="login-container">
             <div className="login-image-container">
                 <img
-                    src="src/assets/fundo-login.png"
+                    src={fundoLogin}
                     alt="Imagem logotipo login"
                     className="login-imagem login-imagem-desktop"
                 />
                 <img
-                    src="src/assets/fundo-login-mobile.png"
+                    src={fundoLoginMobile}
                     alt="Imagem logotipo login"
                     className="login-imagem login-imagem-mobile"
                 />
@@ -82,7 +85,7 @@ const Login: React.FC = () => {
 
                 <div className="login-mobile-banner">
                     <img
-                        src="src/assets/logo.png"
+                        src={logo}
                         alt="Imagem logotipo login"
                         className="login-logo-img login-logo-img--mobile"
                     />
@@ -94,7 +97,7 @@ const Login: React.FC = () => {
 
             <div className="login-form">
                 <div className="login-header">
-                    <img src="src/assets/logo.png"
+                    <img src={logo}
                         alt="Imagem logotipo login"
                         className="login-logo-img" />
                     <h1 className="login-title">
