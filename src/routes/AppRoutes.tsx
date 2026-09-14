@@ -2,7 +2,6 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Navigate,
 } from "react-router-dom";
 
 import MainLayout from "../layouts/MainLayout";
@@ -20,7 +19,7 @@ function AppRoutes() {
       <Routes>
         
         {/* Rota inicial */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/" element={<Login/>} />
 
         {/* Página de login */}
         <Route path="/login" element={<Login />} />
