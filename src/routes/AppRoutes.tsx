@@ -33,14 +33,13 @@ function AppRoutes() {
 
           <Route path="/manager-posts" element={<PostManager/>} />
 
-        </Route>)}
-
-
         {/* Página inexistente */}
         <Route
           path="*"
           element={<h1>Página não encontrada</h1>}
         />
+        
+        </Route>)}
 
       </Routes>
     </BrowserRouter>
