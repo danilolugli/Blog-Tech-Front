@@ -11,26 +11,27 @@ import Users from "../pages/Users/Users";
 import ListarPosts from "../pages/Aluno/ListarPosts";
 import PostDetalhe from "../pages/Aluno/PostDetalhe";
 import PostManager from "../pages/PostManager/PostManager";
+import { ProtectedRoute } from "../components/ProtectedRoute/ProtectedRoute";
 
 function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
 
-        {/* Página de login */}
         <Route path="/login" element={<Login />} />
  
-          <Route element={<MainLayout />} >               
+        <Route element={<ProtectedRoute />}>
+          <Route element={<MainLayout />}>               
+            <Route path="/home" element={<ListarPosts />} />
+            <Route path="/post-detalhe/:id" element={<PostDetalhe />} />
 
-          <Route path="/home" element={<ListarPosts />} />
-
-          <Route path="/post-detalhe/:id" element={<PostDetalhe />} />
-
-          <Route path="/manager-users" element={<Users />} />
-
-          <Route path="/manager-posts" element={<PostManager/>} />
-
-        {/* Página inexistente */}
+            <Route element={<ProtectedRoute allowedRoles={["2", "3"]} />}>
+              <Route path="/manager-posts" element={<PostManager/>} />
+            </Route>
+            <Route element={<ProtectedRoute allowedRoles={["3"]} />}>
+              <Route path="/manager-users" element={<Users />} />
+            </Route>
+          </Route>
         </Route>
 
         <Route

@@ -185,7 +185,7 @@ const SideBar: React.FC = () => {
                         Posts
                     </ButtonSideBar>)}
 
-                    {perfil!="1" && (    
+                    {perfil === "3" && (    
                     <ButtonSideBar onClick={() => {navigate("/manager-users")}}>
                         <UserIcon icon={faUsers} size="lg" />
                         Usuários
