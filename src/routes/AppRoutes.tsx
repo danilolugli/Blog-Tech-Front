@@ -2,6 +2,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  Navigate,
 } from "react-router-dom";
 
 import MainLayout from "../layouts/MainLayout";
@@ -17,6 +18,9 @@ function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+        
+        {/* Rota inicial */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
 
         {/* Página de login */}
         <Route path="/login" element={<Login />} />
@@ -33,12 +37,12 @@ function AppRoutes() {
           <Route path="/manager-posts" element={<PostManager/>} />
 
         {/* Página inexistente */}
+        </Route>)}
+
         <Route
           path="*"
           element={<Login />}
         />
-
-        </Route>)}
 
       </Routes>
     </BrowserRouter>
