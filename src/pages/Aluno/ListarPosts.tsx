@@ -1,5 +1,4 @@
 import './ListarPosts.css';
-import { PostFormModal } from '../../components/PostFormModal/PostFormModal';
 import PostPreview from '../../components/PostPreview/PostPreview';
 import { faChevronLeft, faChevronRight, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,7 +21,6 @@ const ListarPosts: React.FC = () =>  {
     const [posts, setPosts] = useState<Post[]>([]);
     const [paginaAtual, setPaginaAtual] = useState(1);
     const navigate = useNavigate();
-    const perfil = sessionStorage.getItem("perfil");
 
     useEffect(() => {
         buscarPosts();

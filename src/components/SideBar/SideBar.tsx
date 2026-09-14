@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ButtonSideBar from '../ButtonSidebar/ButtonSideBar';
+import ButtonSideBar from '../ButtonSideBar/ButtonSideBar';
 import './SideBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard, faHouse, faUsers, faBars, faXmark, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
