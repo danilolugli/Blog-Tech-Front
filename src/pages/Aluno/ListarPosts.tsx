@@ -69,16 +69,6 @@ const ListarPosts: React.FC = () =>  {
             buscarPostsPesquisa(e.target.value);
           }} />
         </div>
-
-        { perfil!="1" && (<div className='btnCriarPost'>
-          <PostFormModal isOpen={false} onClose={function (): void {
-            throw new Error('Function not implemented.');
-          } } onSubmit={function (values: { title: string; content: string; subject: string; }, postId?: string): Promise<void> | void {
-            throw new Error('Function not implemented.');
-          } }>
-          </PostFormModal>
-        </div>)}
-
       </header>
 
       <ul className='listaPosts'>
