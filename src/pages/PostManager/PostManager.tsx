@@ -18,6 +18,8 @@ import { toast } from "react-toastify";
 const ITEMS_PER_PAGE = 5;
 
 function PostManager() {
+    const perfil = sessionStorage.getItem("perfil");
+    const usuarioLogado = JSON.parse(sessionStorage.getItem("usuario") || "{}");
     const {
         postsList,
         isLoading,
@@ -189,22 +191,26 @@ function PostManager() {
                                         <td>{post.disciplina}</td>
                                         <td>
                                             <div className="action-buttons">
-                                                <button
-                                                    type="button"
-                                                    className="edit-button"
-                                                    onClick={() => handleEditPost(post.id)}
-                                                    title="Editar post"
-                                                >
-                                                    <FontAwesomeIcon icon={faPen} />
-                                                </button>
-                                                <button
-                                                    type="button"
-                                                    className="delete-button"
-                                                    onClick={() => handleDeletePost(post.id)}
-                                                    title="Excluir post"
-                                                >
-                                                    <FontAwesomeIcon icon={faTrash} />
-                                                </button>
+                                                {(perfil === "3" || (perfil === "2" && post.autor === usuarioLogado.nome)) && (
+                                                    <>
+                                                        <button
+                                                            type="button"
+                                                            className="edit-button"
+                                                            onClick={() => handleEditPost(post.id)}
+                                                            title="Editar post"
+                                                        >
+                                                            <FontAwesomeIcon icon={faPen} />
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            className="delete-button"
+                                                            onClick={() => handleDeletePost(post.id)}
+                                                            title="Excluir post"
+                                                        >
+                                                            <FontAwesomeIcon icon={faTrash} />
+                                                        </button>
+                                                    </>
+                                                )}
                                             </div>
                                         </td>
                                     </tr>
