@@ -3,8 +3,6 @@ import Comentario from '../../components/Comentario/Comentario';
 import './PostDetalhe.css';
 import { listarPostsPorId } from './Posts.controller';
 import { useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { criarComentario, listarComentarios } from './Comentario.controller';
 import { getUserById } from '../../services/Users/usersService';
 import { toast } from "react-toastify";
@@ -42,7 +40,6 @@ const PostDetalhe: React.FC = () =>  {
     const { id: postId } = useParams();
     const [comentarios, setComentarios] = useState<Comentario[]>([]);
     const [campoComentario, setCampoComentario] = useState("");
-    const perfilId = sessionStorage.getItem("perfil");
     const usuario = sessionStorage.getItem("usuario");
     const [user, setUser] = useState<User>();
 
@@ -101,17 +98,6 @@ const PostDetalhe: React.FC = () =>  {
         <header className="headerPost">
             <div className='tituloAndBotoes'>
                 <h1 className="titulo">{post?.titulo}</h1>
-                <div className='btnsHeader'>
-                {perfilId!="1" && (
-                    <button className='botaoEditar' title="Editar">
-                        <FontAwesomeIcon size="lg" color="var(--azul-mais-claro)" icon={faPencil} />
-                    </button> )}
-
-                {perfilId!="1" && (
-                    <button className='botaoExcluir' title="Excluir">
-                        <FontAwesomeIcon size="lg" color="var(--azul-mais-claro)" icon={faTrash} />
-                    </button>)}
-                </div>
             </div>
 
             <div>Professor(a) {user?.nome}</div>
