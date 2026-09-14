@@ -22,8 +22,7 @@ function AppRoutes() {
         <Route path="/login" element={<Login />} />
  
         { token && 
-          (<Route element={<MainLayout />} >
-                    
+          (<Route element={<MainLayout />} >               
 
           <Route path="/home" element={<ListarPosts />} />
 
@@ -36,9 +35,9 @@ function AppRoutes() {
         {/* Página inexistente */}
         <Route
           path="*"
-          element={<h1>Página não encontrada</h1>}
+          element={<Login />}
         />
-        
+
         </Route>)}
 
       </Routes>
