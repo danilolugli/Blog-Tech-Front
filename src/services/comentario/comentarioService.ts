@@ -17,3 +17,17 @@ export function criar(comentario: CriarComentario) {
         body: JSON.stringify(comentario),
     });
 }
+
+export function editar(id: number, conteudo: string) {
+    return api(`/comentarios/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({ conteudo }),
+    });
+}
+
+export function excluir(id: number, usuario_solicitante: number) {
+    return api(`/comentarios/${id}`, {
+        method: "DELETE",
+        body: JSON.stringify({ usuario_solicitante })
+    });
+}

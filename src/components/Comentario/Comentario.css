@@ -1,16 +1,18 @@
 .comentario-container {
     display: flex;
     flex-direction: column;
-    padding: 16px;
-    background-color: #f8fafc;
-    border-radius: 8px;
-    margin-bottom: 12px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    margin-bottom: 16px;
     border: 1px solid #e2e8f0;
-    transition: background-color 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .comentario-container:hover {
-    background-color: #f1f5f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+    border-color: #cbd5e1;
 }
 
 .comentario-info {
@@ -22,22 +24,119 @@
 
 .comentario-autor {
     margin: 0;
-    font-size: 14px;
-    font-weight: 700;
-    color: #1e293b;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
 }
 
 .comentario-data {
     margin: 0;
-    font-size: 12px;
-    color: #94a3b8;
+    font-size: 13px;
+    color: #64748b;
+    font-weight: 500;
 }
 
 .comentario-conteudo {
-    margin: 0;
-    font-size: 14px;
+    margin: 4px 0 0 0;
+    font-size: 15px;
     line-height: 1.6;
     color: #334155;
     white-space: pre-wrap;
     word-break: break-word;
+}
+
+.comentario-header-text {
+    display: flex;
+    align-items: center;
+}
+
+.comentario-meta-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.comentario-acoes {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn-acao-comentario {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.btn-acao-comentario:hover {
+    background-color: #e2e8f0;
+    color: #1e293b;
+}
+
+.btn-excluir-comentario:hover {
+    background-color: #fee2e2;
+    color: #ef4444;
+}
+
+.comentario-edicao {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.comentario-textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #334155;
+    background-color: #ffffff;
+    resize: vertical;
+}
+
+.comentario-textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.comentario-edicao-acoes {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.btn-salvar-edicao, .btn-cancelar-edicao {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-salvar-edicao {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.btn-salvar-edicao:hover {
+    background-color: #2563eb;
+}
+
+.btn-cancelar-edicao {
+    background-color: #e2e8f0;
+    color: #475569;
+}
+
+.btn-cancelar-edicao:hover {
+    background-color: #cbd5e1;
 }

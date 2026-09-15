@@ -283,7 +283,7 @@ export function UserFormModal({
                   ? "Salvando..."
                   : isEditing
                     ? "Salvar Alterações"
-                    : "Salvar"}
+                    : "Criar"}
               </button>
             </div>
           </form>
