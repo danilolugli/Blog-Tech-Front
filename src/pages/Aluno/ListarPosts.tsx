@@ -89,7 +89,7 @@ const ListarPosts: React.FC = () =>  {
 
         <label className='numeroPagina'>Página {paginaAtual}</label>
 
-        <button disabled={posts.length <= 6} onClick={() => {
+        <button disabled={posts.length < 6} onClick={() => {
           buscarPosts(paginaAtual + 1);
         }}>
           <FontAwesomeIcon icon={faChevronRight} />
