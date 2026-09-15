@@ -16,7 +16,7 @@
 .barraSair {
     position: absolute;
     bottom: 100px;
-    left: 20px;
+    left: 0;
     width: 100%;
     height: 1px;
     background-color: var(--azul-mais-claro);

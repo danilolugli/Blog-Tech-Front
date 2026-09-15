@@ -5,6 +5,8 @@ import "./Login.css";
 
 import { loginController } from "./Login.controller";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import fundoLogin from "../../assets/fundo-login.png";
 import fundoLoginMobile from "../../assets/fundo-login-mobile.png";
 import logo from "../../assets/logo.png";
@@ -14,6 +16,7 @@ const Login: React.FC = () => {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = async () => {
 
@@ -90,7 +93,7 @@ const Login: React.FC = () => {
                         className="login-logo-img login-logo-img--mobile"
                     />
                     <span className="login-mobile-banner-title">
-                        EduBlog Mobile
+                        Blog Tech Mobile
                     </span>
                 </div>
             </div>
@@ -145,16 +148,28 @@ const Login: React.FC = () => {
                         Senha
                     </label>
 
-                    <input
-                        className="login-input"
-                        id="senha"
-                        type="password"
-                        placeholder="Insira sua senha"
-                        value={senha}
-                        onChange={(e) =>
-                            setSenha(e.target.value)
-                        }
-                    />
+                    <div className="password-input-wrapper">
+                        <input
+                            className="login-input"
+                            id="senha"
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Insira sua senha"
+                            value={senha}
+                            onChange={(e) =>
+                                setSenha(e.target.value)
+                            }
+                            style={{ paddingRight: '36px' }}
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="password-toggle-btn"
+                            tabIndex={-1}
+                            title={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                        >
+                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                        </button>
+                    </div>
                 </div>
 
                 <button

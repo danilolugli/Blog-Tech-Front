@@ -6,22 +6,14 @@ export interface CriarComentario {
     autor_id: number;
 }
 
-const token = sessionStorage.getItem("token");
-
 export function listar(postId: number) {
     return api(`/posts/${postId}/comentarios`, {
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+        method: "GET"
     });}
 
 export function criar(comentario: CriarComentario) {
     return api("/comentarios", {
         method: "POST",
         body: JSON.stringify(comentario),
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
     });
 }

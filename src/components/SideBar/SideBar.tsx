@@ -128,8 +128,9 @@ const BotaoSair = styled.button`
   width: 9.5rem;
 
   &:hover {
-    color: var(--azul);
-    background-color: var(--azul-mais-claro);
+    color: white;
+    background-color: #ef4444;
+    border-color: #ef4444;
   }
   &:active {
     transform: scale(0.95);

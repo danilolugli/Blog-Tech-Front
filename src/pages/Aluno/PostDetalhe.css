@@ -44,6 +44,22 @@
     background-color: red; 
 }
 
+.botaoFechar {
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.botaoFechar:hover {
+    color: red;
+}
+
 .botaoEditar:active, .botaoExcluir:active {
     transform: scale(0.95);
 }
@@ -113,6 +129,8 @@
     padding: 1rem;
     font-size: 1rem;
     resize: none;
+    background-color: white;
+    color: #333;
 }
 
 .botaoComentario {
@@ -134,8 +152,8 @@
 @media (max-width: 768px) {
 
     .postContainer {
-        width: 105%;
-        margin: 1rem;
+        width: 100%;
+        margin: 0;
     }
 
     .headerPost {
@@ -183,8 +201,8 @@
 @media (max-width: 480px) {
 
     .postContainer {
-        width: 105%;
-        margin: 1rem;
+        width: 100%;
+        margin: 0;
     }
 
     .headerPost {

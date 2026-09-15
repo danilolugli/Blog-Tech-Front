@@ -69,16 +69,22 @@ const ListarPosts: React.FC = () =>  {
         </div>
       </header>
 
-      <ul className='listaPosts'>
-        {posts.map((post) => (
-          <li key={post.id} onClick={() => {navigate(`/post-detalhe/${post.id}`)}}>
-            <PostPreview titulo={post.titulo} 
-            descricao={post.conteudo} 
-            professor={post.autor} 
-            data={formatarData(post.data_atualizacao)} />
-          </li>
-        ))}
-      </ul>
+      {posts.length === 0 ? (
+        <div className="empty-state-posts">
+          Nenhum resultado encontrado
+        </div>
+      ) : (
+        <ul className='listaPosts'>
+          {posts.map((post) => (
+            <li key={post.id} onClick={() => {navigate(`/post-detalhe/${post.id}`)}}>
+              <PostPreview titulo={post.titulo} 
+              descricao={post.conteudo} 
+              professor={post.autor} 
+              data={formatarData(post.data_atualizacao)} />
+            </li>
+          ))}
+        </ul>
+      )}
 
       <nav className='paginacao'>
         <button disabled={paginaAtual==1} onClick={() => {

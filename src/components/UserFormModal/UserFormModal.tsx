@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import type { FormEvent } from "react";
 import styles from "./UserFormModal.module.css";
 import { toast } from "react-toastify";
@@ -34,6 +34,18 @@ export function UserFormModal({
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [isClosing, setIsClosing] = useState(false);
+  const [translateY, setTranslateY] = useState(0);
+  const touchStartY = useRef(0);
+
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      onClose();
+      setIsClosing(false);
+      setTranslateY(0);
+    }, 300);
+  };
 
   const isEditing = !!userId;
 
@@ -52,6 +64,8 @@ export function UserFormModal({
     setCpf("");
     setPerfil("");
     setError("");
+    setIsClosing(false);
+    setTranslateY(0);
 
     if (!isEditing || !userId) {
       return;
@@ -93,7 +107,7 @@ export function UserFormModal({
           : "Usuário criado com sucesso!"
       );
 
-      onClose();
+      handleClose();
     } catch (error) {
       if (error instanceof Error) {
         toast.warning(error.message);
@@ -117,16 +131,48 @@ export function UserFormModal({
     return null;
   }
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.scrollTop === 0) {
+        touchStartY.current = e.touches[0].clientY;
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartY.current === 0) return;
+    const currentY = e.touches[0].clientY;
+    const diff = currentY - touchStartY.current;
+    if (diff > 0) {
+      setTranslateY(diff);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartY.current === 0) return;
+    if (translateY > 100) {
+      handleClose();
+    } else {
+      setTranslateY(0);
+    }
+    touchStartY.current = 0;
+  };
+
   return (
     <div
-      className={styles.overlay}
+      className={`${styles.overlay} ${isClosing ? styles.fadeOut : ''}`}
       onClick={(event) => {
         if (event.target === event.currentTarget && !saving) {
-          onClose();
+          handleClose();
         }
       }}
     >
-      <div className={styles.modal}>
+      <div 
+        className={`${styles.modal} ${isClosing ? styles.slideDown : ''}`}
+        style={{ transform: translateY > 0 ? `translateY(${translateY}px)` : undefined, transition: translateY > 0 ? 'none' : 'transform 0.3s ease-out' }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <h2>
           {isEditing ? "Editar Usuário" : "Criar Usuário"}
         </h2>
@@ -222,7 +268,7 @@ export function UserFormModal({
               <button
                 type="button"
                 className={styles.cancelButton}
-                onClick={onClose}
+                onClick={handleClose}
                 disabled={saving}
               >
                 Cancelar

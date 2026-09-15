@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./PostManager.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPen, faEye } from "@fortawesome/free-solid-svg-icons";
 
 import { ConfirmModal } from "../../components/ConfirmModal/ConfirmModal";
 import { PostFormModal } from "../../components/PostFormModal/PostFormModal";
@@ -18,6 +19,7 @@ import { toast } from "react-toastify";
 const ITEMS_PER_PAGE = 5;
 
 function PostManager() {
+    const navigate = useNavigate();
     const perfil = sessionStorage.getItem("perfil");
     const usuarioLogado = JSON.parse(sessionStorage.getItem("usuario") || "{}");
     const {
@@ -191,6 +193,14 @@ function PostManager() {
                                         <td>{post.disciplina}</td>
                                         <td>
                                             <div className="action-buttons">
+                                                <button
+                                                    type="button"
+                                                    className="view-button"
+                                                    onClick={() => navigate(`/post-detalhe/${post.id}`)}
+                                                    title="Visualizar post"
+                                                >
+                                                    <FontAwesomeIcon icon={faEye} />
+                                                </button>
                                                 {(perfil === "3" || (perfil === "2" && post.autor === usuarioLogado.nome)) && (
                                                     <>
                                                         <button

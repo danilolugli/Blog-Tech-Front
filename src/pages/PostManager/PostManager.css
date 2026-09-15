@@ -190,6 +190,16 @@
   font-size: 13px;
 }
 
+.view-button {
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+}
+
+.view-button:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
 .edit-button {
   border: 1px solid #e2e8f0;
   color: #475569;
@@ -259,7 +269,6 @@
   }
 }
 
-/* Mobile */
 @media (max-width: 820px) {
   .post-page {
     padding: 16px;

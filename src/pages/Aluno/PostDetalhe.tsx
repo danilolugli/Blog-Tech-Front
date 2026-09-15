@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import Comentario from '../../components/Comentario/Comentario';
 import './PostDetalhe.css';
 import { listarPostsPorId } from './Posts.controller';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { criarComentario, listarComentarios } from './Comentario.controller';
 import { getUserById } from '../../services/Users/usersService';
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export interface Post {
   id: number;
@@ -38,6 +40,7 @@ export interface User {
 const PostDetalhe: React.FC = () =>  {
     const [post, setPost] = useState<Post>();
     const { id: postId } = useParams();
+    const navigate = useNavigate();
     const [comentarios, setComentarios] = useState<Comentario[]>([]);
     const [campoComentario, setCampoComentario] = useState("");
     const usuario = sessionStorage.getItem("usuario");
@@ -98,6 +101,9 @@ const PostDetalhe: React.FC = () =>  {
         <header className="headerPost">
             <div className='tituloAndBotoes'>
                 <h1 className="titulo">{post?.titulo}</h1>
+                <button className="botaoFechar" onClick={() => navigate(-1)} aria-label="Fechar">
+                    <FontAwesomeIcon icon={faXmark} />
+                </button>
             </div>
 
             <div>Professor(a) {user?.nome}</div>

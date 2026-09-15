@@ -1,4 +1,25 @@
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(20px); opacity: 0; }
+}
+
 .overlay {
+  animation: fadeIn 0.3s ease-out forwards;
   position: fixed;
   top: 0;
   left: 0;
@@ -16,6 +37,7 @@
 }
 
 .modal {
+  animation: slideUp 0.3s ease-out forwards;
   width: 100%;
   max-width: 500px;
   max-height: calc(100vh - 40px);
@@ -31,6 +53,14 @@
   border-radius: 16px;
 
   box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+}
+
+.fadeOut {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+.slideDown {
+  animation: slideDown 0.3s ease-out forwards;
 }
 
 .modal h2 {
@@ -92,6 +122,7 @@
   font-size: 14px;
 
   font-family: inherit;
+  color-scheme: light;
 }
 
 .field input:focus,
@@ -169,16 +200,31 @@
 
 @media (max-width: 480px) {
   .overlay {
-    padding: 16px;
+    padding: 0;
     box-sizing: border-box;
     align-items: flex-end;
   }
 
+  @keyframes slideUpMobile {
+    from { transform: translateY(100%); opacity: 1; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes slideDownMobile {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(100%); opacity: 1; }
+  }
+
   .modal {
+    animation: slideUpMobile 0.3s ease-out forwards;
     max-width: 100%;
     max-height: calc(100vh - 32px);
     padding: 20px;
     border-radius: 16px 16px 0 0; 
+  }
+
+  .slideDown {
+    animation: slideDownMobile 0.3s ease-out forwards;
   }
 
   .modal h2 {

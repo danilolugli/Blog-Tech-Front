@@ -39,8 +39,13 @@
     padding: 8px 10px 8px 35px;
     border: none;
     background-color: var(--cor-fundo);
+    color: #333;
     font-size: 16px;
     outline: none;
+}
+
+.inputPesquisa::placeholder {
+    color: #666;
 }
 
 .btnCriarPost {
@@ -56,6 +61,14 @@
     list-style: none;
     flex-wrap: wrap;
     gap: 30px;
+}
+
+.empty-state-posts {
+    margin-top: 50px;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 16px;
+    width: 100%;
 }
 
 .paginacao {

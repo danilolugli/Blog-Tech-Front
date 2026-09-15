@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import "./Comentario.css";
 
 interface ComentarioProps {
     professor: string;
@@ -6,48 +6,15 @@ interface ComentarioProps {
     conteudo: string;
 }
 
-const ComentarioContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-`;
-
-const Linha = styled.hr`
-    border: 1px solid var(--azul-mais-claro);
-    width: 100%;
-`;
-
-const ComentarioInfo = styled.div`
-    display: flex;
-    justify-content: space-between;
-    gap: 0.5rem;
-`;
-
-const Professor = styled.h3`
-    margin: 0;
-`;
-
-const Data = styled.p`
-    margin: 0;
-    font-size: 0.875rem;
-    color: #666;
-`;
-
-const Conteudo = styled.p`
-    margin: 0;
-    line-height: 1.5;
-`;
-
 const Comentario = ({ professor, data, conteudo }: ComentarioProps) => {
     return (
-        <ComentarioContainer>
-            <Linha></Linha>
-            <ComentarioInfo>
-                <Professor>{professor}</Professor>
-                <Data>{data}</Data>
-            </ComentarioInfo>
-            <Conteudo>{conteudo}</Conteudo>
-        </ComentarioContainer>
+        <div className="comentario-container">
+            <div className="comentario-info">
+                <h3 className="comentario-autor">{professor}</h3>
+                <p className="comentario-data">{data}</p>
+            </div>
+            <p className="comentario-conteudo">{conteudo}</p>
+        </div>
     )
 }
 
