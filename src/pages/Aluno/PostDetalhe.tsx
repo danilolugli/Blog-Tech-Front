@@ -164,10 +164,107 @@ const PostDetalhe: React.FC = () =>  {
         }
     }
 
+function parseInlineMarkdown(text: string): React.ReactNode[] {
+    const parts: React.ReactNode[] = [];
+    const regex = /(\*\*[^*]+\*\*|\*[^*]+\*)/g;
+    let lastIdx = 0;
+    let match: RegExpExecArray | null;
+    let key = 0;
+
+    while ((match = regex.exec(text)) !== null) {
+        if (match.index > lastIdx) {
+            parts.push(text.slice(lastIdx, match.index));
+        }
+        const token = match[0];
+        if (token.startsWith("**") && token.endsWith("**")) {
+            parts.push(<strong key={key++}>{token.slice(2, -2)}</strong>);
+        } else if (token.startsWith("*") && token.endsWith("*")) {
+            parts.push(<em key={key++}>{token.slice(1, -1)}</em>);
+        }
+        lastIdx = regex.lastIndex;
+    }
+    if (lastIdx < text.length) {
+        parts.push(text.slice(lastIdx));
+    }
+    return parts.length > 0 ? parts : [text];
+}
+
+function renderFormattedContent(content: string) {
+    if (!content) return null;
+
+    const lines = content.split(/\r?\n/);
+    const elements: React.ReactNode[] = [];
+    let currentList: string[] = [];
+
+    function flushList() {
+        if (currentList.length > 0) {
+            elements.push(
+                <ul key={`ul-${elements.length}`} className="postBulletList">
+                    {currentList.map((item, idx) => (
+                        <li key={idx}>{parseInlineMarkdown(item)}</li>
+                    ))}
+                </ul>
+            );
+            currentList = [];
+        }
+    }
+
+    lines.forEach((rawLine, idx) => {
+        const line = rawLine.trim();
+
+        if (line.startsWith("* ") || line.startsWith("- ")) {
+            currentList.push(line.slice(2));
+            return;
+        }
+
+        flushList();
+
+        if (!line) {
+            return;
+        }
+
+        if (line.startsWith("### ")) {
+            elements.push(
+                <h3 key={`h3-${idx}`} className="postHeading3">
+                    {line.slice(4)}
+                </h3>
+            );
+        } else if (line.startsWith("## ")) {
+            elements.push(
+                <h2 key={`h2-${idx}`} className="postHeading2">
+                    {line.slice(3)}
+                </h2>
+            );
+        } else if (line.startsWith("# ")) {
+            elements.push(
+                <h1 key={`h1-${idx}`} className="postHeading1">
+                    {line.slice(2)}
+                </h1>
+            );
+        } else if (line === "---" || line === "***") {
+            elements.push(<hr key={`hr-${idx}`} className="postSectionDivider" />);
+        } else {
+            elements.push(
+                <p key={`p-${idx}`} className="postParagraph">
+                    {parseInlineMarkdown(line)}
+                </p>
+            );
+        }
+    });
+
+    flushList();
+
+    return elements;
+}
+
   return (
-    <>
-    <section className="postContainer">
+    <div className="postContainer">
+      <div className="postArticleWrapper">
         <header className="headerPost">
+            {post?.disciplina && (
+                <span className="postDisciplinaBadge">{post.disciplina}</span>
+            )}
+
             <div className='tituloAndBotoes'>
                 <h1 className="titulo">{post?.titulo}</h1>
                 <div className="post-actions-container">
@@ -210,22 +307,30 @@ const PostDetalhe: React.FC = () =>  {
                 isLoading={isDeleting}
             />
 
-            <div className="post-autor">
-                {user?.perfil_id === "3" ? "Administrador(a) " : "Professor(a) "}
-                {user?.nome}
+            <div className="postMeta">
+                <div className="postMetaText">
+                    <div className="postAuthorRow">
+                        <span className="postAuthorName">{user?.nome || post?.autor || "Autor"}</span>
+                        <span className={`postRoleBadge ${user?.perfil_id === "3" ? "admin" : "professor"}`}>
+                            {user?.perfil_id === "3" ? "Administrador(a)" : "Professor(a)"}
+                        </span>
+                    </div>
+                    <span className="postDate">
+                        Publicado em {formatarData(post?.data_atualizacao || post?.data_criacao)}
+                    </span>
+                </div>
             </div>
-            <div className="post-data">Publicado em {formatarData(post?.data_atualizacao)}</div>
         </header>
 
         <hr className='linha' />
 
-        <main className="conteudo">
-           {post?.conteudo}
-        </main>
+        <article className="conteudo">
+           {renderFormattedContent(post?.conteudo || "")}
+        </article>
         
         <hr className='linha' />
 
-        <div className="comentarios">
+        <section className="comentarios">
             <label className="tituloComentario">Comentários ({comentarios.length})</label>
             <ul className="listaComentarios">
                 {comentarios.map((comentario) => {
@@ -251,18 +356,28 @@ const PostDetalhe: React.FC = () =>  {
                     );
                 })}
             </ul>
-        </div>
+        </section>
 
         <hr className='linha' />
 
         <div className='adicionarComentario'>
-            <textarea value={campoComentario} onChange={(e) => setCampoComentario(e.target.value)} className='inputComentario' placeholder='Adicionar comentário...' ></textarea>
-            <button className='botaoComentario' onClick={() => {
-                enviarComentario(campoComentario, Number(postId));
-            }}>Enviar</button>
+            <textarea 
+                value={campoComentario} 
+                onChange={(e) => setCampoComentario(e.target.value)} 
+                className='inputComentario' 
+                placeholder='Escreva um comentário...' 
+            />
+            <button 
+                className='botaoComentario' 
+                onClick={() => {
+                    enviarComentario(campoComentario, Number(postId));
+                }}
+            >
+                Enviar
+            </button>
         </div>
-    </section>
-    </>
+      </div>
+    </div>
   )
 };
 

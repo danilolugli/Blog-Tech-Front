@@ -13,14 +13,6 @@
     background-color: white;
 }
 
-.barraSair {
-    position: absolute;
-    bottom: 100px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: var(--azul-mais-claro);
-}
 
 .mobile-header-logo {
     width: 32px;

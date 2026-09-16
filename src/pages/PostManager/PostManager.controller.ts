@@ -69,36 +69,24 @@ function getLoggedUserId(): number {
 const ITEMS_PER_PAGE = 5;
 
 export function usePostsPage() {
-    const [postsList, setPostsList] = useState<IPost[]>([]);
+    const [allPosts, setAllPosts] = useState<IPost[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [loadError, setLoadError] = useState<string | null>(null);
 
     const [search, setSearch] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
 
-    const [prevSearch, setPrevSearch] = useState(search);
-    if (search !== prevSearch) {
-        setPrevSearch(search);
-        setCurrentPage(1);
-    }
-
     async function reloadPosts() {
         setIsLoading(true);
         setLoadError(null);
 
         try {
-            const response: RawPost[] = search.trim()
-                ? await pesquisarPosts({
-                      paginaAtual: currentPage,
-                      itensPagina: ITEMS_PER_PAGE,
-                      pesquisa: search.trim(),
-                  })
-                : await listarTodosPosts({
-                      paginaAtual: currentPage,
-                      itensPagina: ITEMS_PER_PAGE,
-                  });
+            const response: RawPost[] = await listarTodosPosts({
+                paginaAtual: 1,
+                itensPagina: 1000,
+            });
 
-            setPostsList(response.map(mapPost));
+            setAllPosts(response.map(mapPost));
         } catch (error) {
             setLoadError(
                 error instanceof Error
@@ -112,18 +100,51 @@ export function usePostsPage() {
 
     useEffect(() => {
         reloadPosts();
-    }, [currentPage, search]);
+    }, []);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [search]);
+
+    const filteredPosts = allPosts.filter((post) => {
+        const query = search.toLowerCase().trim();
+        if (!query) return true;
+        return (
+            post.titulo.toLowerCase().includes(query) ||
+            post.disciplina.toLowerCase().includes(query) ||
+            post.autor.toLowerCase().includes(query) ||
+            post.conteudo.toLowerCase().includes(query)
+        );
+    });
+
+    const totalPages = Math.max(
+        1,
+        Math.ceil(filteredPosts.length / ITEMS_PER_PAGE)
+    );
+
+    useEffect(() => {
+        if (currentPage > totalPages) {
+            setCurrentPage(totalPages);
+        }
+    }, [totalPages, currentPage]);
+
+    const postsList = filteredPosts.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+    );
 
     function goToPreviousPage() {
         setCurrentPage((page) => Math.max(1, page - 1));
     }
 
     function goToNextPage() {
-        setCurrentPage((page) => page + 1);
+        setCurrentPage((page) => Math.min(totalPages, page + 1));
     }
 
     return {
         postsList,
+        totalPostsCount: filteredPosts.length,
+        totalPages,
         isLoading,
         loadError,
         search,

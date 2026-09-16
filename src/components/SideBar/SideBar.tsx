@@ -3,7 +3,14 @@ import styled from 'styled-components';
 import ButtonSideBar from '../ButtonSideBar/ButtonSideBar';
 import './SideBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClipboard, faHouse, faUsers, faBars, faXmark, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { 
+    faClipboard, 
+    faHouse, 
+    faUsers, 
+    faBars, 
+    faXmark, 
+    faRightFromBracket 
+} from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import logo from "../../assets/logo.png";
 
@@ -17,7 +24,7 @@ const SideBarContainer = styled.div<{ $isOpen: boolean }>`
   padding: 20px;
   display: flex;
   flex-direction: column;
-  font-family: Merriweather;
+  font-family: Merriweather, Arial, sans-serif;
   background-color: var(--azul-mais-escuro);
   overflow-x: hidden;
   overflow-y: auto;
@@ -95,37 +102,65 @@ const SideBarList = styled.ul`
   color: black;
   font-size: 20px;
   list-style: none;
-  margin: 40px 0px;
+  margin: 30px 0px 0px 0px;
   padding: 0px;
-  align-content: center;
-  justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 
-const SideBarActions = styled(SideBarList)`
-  margin-left: auto;
+const SidebarFooter = styled.div`
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(226, 235, 255, 0.15);
+`;
+
+const UserSimpleInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 4px;
+  text-align: left;
+`;
+
+const UserName = styled.span`
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Arial, sans-serif;
+`;
+
+const UserRole = styled.span`
+  font-size: 12px;
+  color: #94a3b8;
+  font-family: Arial, sans-serif;
 `;
 
 const BotaoSair = styled.button`
-  position: absolute;
-  height: 45px;
-  background-color: var(--azul-mais-escuro);
+  height: 40px;
+  width: 100%;
+  background-color: transparent;
   color: var(--azul-mais-claro);
-  border: 1px solid var(--azul-mais-claro);
-  margin: 10px 0px;
+  border: 1px solid rgba(226, 235, 255, 0.25);
   cursor: pointer;
-  bottom: 20px;
-  left: 35px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  padding: 0px 10px;
+  gap: 10px;
+  padding: 0px 14px;
   font-size: 14px;
-  font-weight: 700;
-  transition: background-color 0.3s ease;
-  border-radius: 10px;
-  width: 9.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 
   &:hover {
     color: white;
@@ -133,7 +168,7 @@ const BotaoSair = styled.button`
     border-color: #ef4444;
   }
   &:active {
-    transform: scale(0.95);
+    transform: scale(0.98);
   }
 `;
 
@@ -147,10 +182,36 @@ const SidebarHeaderInternal = styled.div`
   }
 `;
 
+function getRoleLabel(perfilId: string) {
+    switch (perfilId) {
+        case "3":
+            return "Administrador";
+        case "2":
+            return "Professor";
+        case "1":
+            return "Aluno";
+        default:
+            return "Usuário";
+    }
+}
+
 const SideBar: React.FC = () => {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
-    const perfil = sessionStorage.getItem("perfil");
+
+    let usuarioLogado: { nome?: string; email?: string; perfil_id?: string } = {};
+    try {
+        const rawUser = sessionStorage.getItem("usuario");
+        if (rawUser) {
+            usuarioLogado = JSON.parse(rawUser);
+        }
+    } catch {
+        // Fallback silencioso
+    }
+
+    const perfil = String(usuarioLogado.perfil_id || sessionStorage.getItem("perfil") || "1");
+    const roleLabel = getRoleLabel(perfil);
+    const nomeExibicao = usuarioLogado.nome || roleLabel;
 
     return (
         <>
@@ -180,7 +241,7 @@ const SideBar: React.FC = () => {
                         Home
                     </ButtonSideBar>
 
-                    {perfil!="1" && (
+                    {perfil !== "1" && (
                     <ButtonSideBar onClick={() => {navigate("/manager-posts")}}>
                         <UserIcon icon={faClipboard} size="lg" />
                         Posts
@@ -191,21 +252,22 @@ const SideBar: React.FC = () => {
                         <UserIcon icon={faUsers} size="lg" />
                         Usuários
                     </ButtonSideBar>)}
-                    
                 </SideBarList>
 
-                <div className="barraSair"></div>
+                <SidebarFooter>
+                    <UserSimpleInfo>
+                        <UserName title={nomeExibicao}>{nomeExibicao}</UserName>
+                        <UserRole>{roleLabel}</UserRole>
+                    </UserSimpleInfo>
 
-                <SideBarActions>
                     <BotaoSair onClick={() => {
-                      navigate("/login");
-                      sessionStorage.clear();
+                        sessionStorage.clear();
+                        navigate("/login");
                     }}>
-                        <UserIcon icon={faRightFromBracket} size="lg" />
+                        <UserIcon icon={faRightFromBracket} />
                         Sair
                     </BotaoSair>
-                </SideBarActions>
-                
+                </SidebarFooter>
             </SideBarContainer>
         </>
     );

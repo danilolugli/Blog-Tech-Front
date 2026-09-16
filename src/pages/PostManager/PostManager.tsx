@@ -16,14 +16,14 @@ import {
 } from "./PostManager.controller";
 import { toast } from "react-toastify";
 
-const ITEMS_PER_PAGE = 5;
-
 function PostManager() {
     const navigate = useNavigate();
     const perfil = sessionStorage.getItem("perfil");
     const usuarioLogado = JSON.parse(sessionStorage.getItem("usuario") || "{}");
     const {
         postsList,
+        totalPostsCount,
+        totalPages,
         isLoading,
         loadError,
         search,
@@ -107,7 +107,6 @@ function PostManager() {
         }
     }
 
-    const isLastPage = postsList.length < ITEMS_PER_PAGE;
 
     function formatarData(isoDate: string): string {
         const data = new Date(isoDate);
@@ -228,7 +227,7 @@ function PostManager() {
 
                                 {postsList.length === 0 && (
                                     <tr>
-                                        <td colSpan={4} className="empty-state">
+                                        <td colSpan={5} className="empty-state">
                                             Nenhum post encontrado.
                                         </td>
                                     </tr>
@@ -236,13 +235,19 @@ function PostManager() {
                             </tbody>
                         </table>
 
-                        {postsList.length > 0 && (
+                        {totalPostsCount > 0 && (
                             <div className="pagination">
                                 <button type="button" onClick={goToPreviousPage} disabled={currentPage === 1}>
                                     Anterior
                                 </button>
-                                <span className="pagination-info">Página {currentPage}</span>
-                                <button type="button" onClick={goToNextPage} disabled={isLastPage}>
+                                <span className="pagination-info">
+                                    Página {currentPage} de {totalPages}
+                                </span>
+                                <button
+                                    type="button"
+                                    onClick={goToNextPage}
+                                    disabled={currentPage === totalPages}
+                                >
                                     Próxima
                                 </button>
                             </div>

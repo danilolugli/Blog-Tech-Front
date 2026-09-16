@@ -33,20 +33,6 @@
 .postPreview-author-info {
     display: flex;
     align-items: center;
-    gap: 12px;
-}
-
-.postPreview-avatar {
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, var(--azul-claro), var(--azul));
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size: 16px;
 }
 
 .postPreview-professor {
