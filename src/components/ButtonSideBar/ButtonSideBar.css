@@ -4,13 +4,14 @@
     align-items: center;
     justify-content: flex-start;
     margin: 10px 0px;
-    padding: 0px 10px;
+    padding: 0px 16px;
     width: 90%;
-    height: 40px;
-    font-size: 14px;
+    height: 48px;
+    font-size: 16px;
     font-weight: 700;
     background-color: var(--azul);
     color: var(--azul-mais-claro);
+    gap: 12px;
     
     border: none;
     cursor: pointer;

@@ -5,43 +5,68 @@
     background-color: #f8fafc;
 }
 
-.titulo {
-    font-weight: bold;
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 40px 10px 40px;
 }
 
-.headerPosts {
+.post-title {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.post-header h1 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.post-header p {
+    margin: 6px 0 0;
+    color: #64748b;
+    font-size: 13px;
 }
 
 .containerPesquisa {
     position: relative;
-    margin: 30px auto;
-    width: 40%;
-    height: 40px;
-    border: 1px solid #000000;
-    border-radius: 20px;
-    background-color: var(--cor-fundo);
+    width: 400px;
+    height: 48px;
+    border-radius: 24px;
+    background-color: #f1f5f9;
     font-size: 16px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s ease;
+}
+
+.containerPesquisa:focus-within {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
 }
 
 .iconePesquisa {
     position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+    left: 16px;
+    color: #64748b;
+    font-size: 18px;
 }
 
 .inputPesquisa {
     width: 100%;
-    height: 40px;
-    padding: 8px 10px 8px 35px;
+    height: 100%;
+    padding: 8px 16px 8px 48px;
     border: none;
-    background-color: var(--cor-fundo);
-    color: #333;
+    background-color: transparent;
+    color: #1e293b;
     font-size: 16px;
     outline: none;
+    border-radius: 24px;
 }
 
 .inputPesquisa::placeholder {
@@ -130,16 +155,17 @@
         width: 100%;
     }
 
-    .headerPosts {
-        margin-left: 2rem;
-        margin-right: 2rem;
-        flex-wrap: wrap;
-        justify-content: center;
+    .post-header {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
     }
 
     .containerPesquisa {
-        width: 70%;
-        margin: 30px auto;
+        width: 100%;
+        margin: 0;
     }
 
     .btnCriarPost {
@@ -162,15 +188,15 @@
 
 @media (max-width: 480px) {
 
-    .headerPosts {
+    .post-header {
         flex-direction: column;
         margin: 1rem;
         align-items: stretch;
     }
 
-    .titulo {
-        font-size: 1.5rem;
-        text-align: center;
+    .post-header h1 {
+        font-size: 20px;
+        text-align: left;
     }
 
     .containerPesquisa {

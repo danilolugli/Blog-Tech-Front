@@ -57,9 +57,12 @@ const ListarPosts: React.FC = () =>  {
 
   return (
     <section className='listarPostsContainer'>
-      <h1 className='titulo'>Posts Recentes</h1>
-      
-      <header className='headerPosts'>
+      <div className="post-header">
+        <div className="post-title">
+          <h1>Posts Recentes</h1>
+          <p>Fique por dentro das últimas publicações e materiais</p>
+        </div>
+        
         <div className='containerPesquisa'>   
           <FontAwesomeIcon icon={faMagnifyingGlass} className='iconePesquisa' />
           <input type="text" placeholder="Busque por palavras-chave" className="inputPesquisa" 
@@ -67,7 +70,7 @@ const ListarPosts: React.FC = () =>  {
             buscarPostsPesquisa(e.target.value);
           }} />
         </div>
-      </header>
+      </div>
 
       {posts.length === 0 ? (
         <div className="empty-state-posts">
@@ -80,6 +83,7 @@ const ListarPosts: React.FC = () =>  {
               <PostPreview titulo={post.titulo} 
               descricao={post.conteudo} 
               professor={post.autor} 
+              disciplina={post.disciplina}
               data={formatarData(post.data_atualizacao)} />
             </li>
           ))}

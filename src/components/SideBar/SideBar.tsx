@@ -139,7 +139,6 @@ const BotaoSair = styled.button`
 
 const UserIcon = styled(FontAwesomeIcon)`
   color: var(--azul-mais-claro);
-  margin: 0px 8px;
 `;
 
 const SidebarHeaderInternal = styled.div`
