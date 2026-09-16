@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import {
     listarTodosPosts,
-    pesquisarPosts,
     criarPost,
     editarPost,
     deletarPost,
