@@ -20,6 +20,7 @@ export interface Post {
 const ListarPosts: React.FC = () =>  {
     const [posts, setPosts] = useState<Post[]>([]);
     const [paginaAtual, setPaginaAtual] = useState(1);
+    const [pesquisa, setPesquisa] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -41,15 +42,16 @@ const ListarPosts: React.FC = () =>  {
       }
     }
 
-    async function buscarPostsPesquisa(palavraBusca?: string) {
+    async function buscarPostsPesquisa(pagina?: number, palavraBusca?: string) {
         try {
             const response = await pesquisarPosts({
-                paginaAtual: 1,
+                paginaAtual: pagina || paginaAtual,
                 itensPagina: 6,
                 pesquisa: palavraBusca ? palavraBusca : ''
             });
 
             setPosts(response);
+            setPaginaAtual(pagina || paginaAtual);
         } catch (error) {
             console.error("Erro ao buscar posts:", error);
         }
@@ -67,7 +69,8 @@ const ListarPosts: React.FC = () =>  {
           <FontAwesomeIcon icon={faMagnifyingGlass} className='iconePesquisa' />
           <input type="text" placeholder="Busque por palavras-chave" className="inputPesquisa" 
           onChange={(e) => {
-            buscarPostsPesquisa(e.target.value);
+            buscarPostsPesquisa(paginaAtual, e.target.value);
+            setPesquisa(e.target.value)
           }} />
         </div>
       </div>
@@ -92,7 +95,7 @@ const ListarPosts: React.FC = () =>  {
 
       <nav className='paginacao'>
         <button disabled={paginaAtual==1} onClick={() => {
-          buscarPosts(paginaAtual - 1);
+          buscarPostsPesquisa(paginaAtual - 1, pesquisa);
         }}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
@@ -100,7 +103,7 @@ const ListarPosts: React.FC = () =>  {
         <label className='numeroPagina'>Página {paginaAtual}</label>
 
         <button disabled={posts.length < 6} onClick={() => {
-          buscarPosts(paginaAtual + 1);
+          buscarPostsPesquisa(paginaAtual + 1, pesquisa);
         }}>
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
